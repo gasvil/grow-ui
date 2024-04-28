@@ -1,0 +1,71 @@
+.gr-button {
+	font-family: var(--gr-font);
+	font-size: var(--gr-font-size);
+	appearance: none;
+	outline: none;
+	border: none;
+	background: none;
+	cursor: pointer;
+	border-radius: var(--gr-corner-radius);
+}
+
+.gr-button:active {
+	transform: translateY(1px);
+}
+
+/* Sizes */
+.gr-button--small {
+	height: 38px;
+	padding: 0 20px;
+}
+
+.gr-button--medium {
+	height: 48px;
+	padding: 0 26px;
+}
+
+.gr-button--large {
+	height: 58px;
+	padding: 0 32px;
+}
+
+/* Priority */
+.gr-button--primary {
+
+}
+
+.gr-button--secondary {
+
+}
+
+.gr-button--tertiary {
+
+}
+
+/* Types + Priority */
+.gr-button--box.gr-button--primary {
+	background-color: var(--gr-primary-color);
+	color: white;
+}
+
+.gr-button--box.gr-button--secondary {
+	background-color: var(--gr-secondary-color);
+	color: white;
+}
+
+.gr-button--box.gr-button--tertiary {
+	background-color: var(--gr-tertiary-color);
+	color: white;
+}
+
+.gr-button--outline {
+	
+}
+
+.gr-button--negative {
+	
+}
+
+.gr-button--inline {
+	
+}

@@ -1,0 +1,17 @@
+:root {
+
+	/* Fonts */
+	--gr-font: "Rubik", sans-serif;
+	--gr-font-size: 16px;
+	--gr-font-weight: 400;
+
+	/* Colors */
+	--gr-primary-color: #2BBCBC;
+	--gr-secondary-color: #7460EE;
+	--gr-tertiary-color: #BC712B;
+
+	/* Decorations */
+	--gr-corner-radius: 5px;
+	--gr-border-thickness: 1px;	
+
+}
