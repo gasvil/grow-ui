@@ -1,11 +1,24 @@
 import { LitElement, html } from "lit";
-import { customElement } from "lit/decorators.js";
+import { customElement, property } from "lit/decorators.js";
 
 @customElement('gr-button')
 export class GrButton extends LitElement {
-    render() {
-        return html`
-            <button>Click me</button>
-        `;
-    }
+
+	@property() //{type: String, reflect: true}
+	label?: string
+
+	render() {
+		return html`
+			<button>
+				${this.label}
+			</button>
+		`;
+	}
+
+}
+
+declare global {
+	interface HTMLElementTagNameMap {
+		'gr-button': GrButton
+	}
 }
