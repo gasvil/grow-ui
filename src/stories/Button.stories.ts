@@ -1,12 +1,15 @@
-import { html } from "lit"
-import "../components/button/button"
+import { StoryObj } from "@storybook/web-components";
+import { html } from "lit";
 
 const meta = {
-    title: "Example/Button",
+    title: "Grow/Button",
     tags: ["autodocs"],
-    render: () => html`
-        <button>Button</button>
-    `
+    render: () => html`<gr-button></gr-button>`
 }
 
 export default meta
+type Story = StoryObj
+
+export const Primary: Story = {
+    
+}
