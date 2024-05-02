@@ -1,0 +1,43 @@
+.gr-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gr-loader__indicator {
+  display: inline-block;
+  pointer-events: none;
+  user-select: none;
+  border-radius: 50%;
+  border-style: solid;
+  height: 20px;
+  width: 20px;
+  border-width: 3px;
+  border-style: solid;
+  animation: gr-loader-indicator linear 0.7s infinite;
+}
+
+@keyframes gr-loader-indicator {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}
+
+.gr-loader--primary .gr-loader__indicator {
+  border-color: var(--gr-primary-color-opacity);
+  border-top-color: var(--gr-primary-color);
+}
+
+.gr-loader--secondary .gr-loader__indicator {
+  border-color: var(--gr-secondary-color-opacity);
+  border-top-color: var(--gr-secondary-color);
+}
+
+.gr-loader--tertiary .gr-loader__indicator {
+  border-color: var(--gr-tertiary-color-opacity);
+  border-top-color: var(--gr-tertiary-color);
+}
+
+.gr-loader--negative .gr-loader__indicator {
+  border-color: rgba(255, 255, 255, 0.5);
+  border-top-color: white;
+}

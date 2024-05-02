@@ -7,6 +7,7 @@
 	background: none;
 	cursor: pointer;
 	border-radius: var(--gr-corner-radius);
+	user-select: none;
 }
 
 .gr-button:active {
@@ -14,35 +15,22 @@
 }
 
 /* Sizes */
-.gr-button--small {
+.gr-button--small:not(.gr-button--inline) {
 	height: 38px;
 	padding: 0 20px;
 }
 
-.gr-button--medium {
+.gr-button--medium:not(.gr-button--inline) {
 	height: 48px;
 	padding: 0 26px;
 }
 
-.gr-button--large {
+.gr-button--large:not(.gr-button--inline) {
 	height: 58px;
 	padding: 0 32px;
 }
 
-/* Priority */
-.gr-button--primary {
-
-}
-
-.gr-button--secondary {
-
-}
-
-.gr-button--tertiary {
-
-}
-
-/* Types + Priority */
+/* Types box + Priority */
 .gr-button--box.gr-button--primary {
 	background-color: var(--gr-primary-color);
 	color: white;
@@ -58,14 +46,66 @@
 	color: white;
 }
 
-.gr-button--outline {
-	
+/* Types outline + Priority */
+.gr-button--outline.gr-button--primary {
+	border: var(--gr-border-thickness) solid var(--gr-primary-color);
+	color: var(--gr-primary-color)
 }
 
-.gr-button--negative {
-	
+.gr-button--outline.gr-button--secondary {
+	border: var(--gr-border-thickness) solid var(--gr-secondary-color);
+	color: var(--gr-secondary-color)
 }
 
-.gr-button--inline {
-	
+.gr-button--outline.gr-button--tertiary {
+	border: var(--gr-border-thickness) solid var(--gr-tertiary-color);
+	color: var(--gr-tertiary-color)
+}
+
+/* Types negative + Priority primary */
+.gr-button--negative.gr-button--primary {
+	background-color: white;
+	color: var(--gr-primary-color)
+}
+
+.gr-button--negative.gr-button--secondary {
+	background-color: white;
+	color: var(--gr-secondary-color)
+}
+
+.gr-button--negative.gr-button--tertiary {
+	background-color: white;
+	color: var(--gr-tertiary-color)
+}
+
+/* Types inline + Priority primary */
+.gr-button--inline.gr-button--primary {
+	color: var(--gr-primary-color);
+}
+
+.gr-button--inline.gr-button--secondary {
+	color: var(--gr-secondary-color);
+}
+
+.gr-button--inline.gr-button--tertiary {
+	color: var(--gr-tertiary-color);
+}
+
+/* States disabled + Type */
+.gr-button--disabled.gr-button--box,
+.gr-button--disabled.gr-button--negative {
+	pointer-events: none;
+	background-color: var(--gr-disabled-color-primary);
+	color: var(--gr-disabled-color-secondary);
+}
+
+.gr-button--disabled.gr-button--outline {
+	pointer-events: none;
+	border-color: var(--gr-disabled-color-primary);
+	color: var(--gr-disabled-color-secondary);
+}
+
+.gr-button--disabled.gr-button--inline {
+	pointer-events: none;
+	color: var(--gr-disabled-color-secondary);
 }

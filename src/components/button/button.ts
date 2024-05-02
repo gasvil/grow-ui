@@ -1,11 +1,12 @@
 import { LitElement, html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import styles from "./button.css?inline"
-import { modifiersToBem } from "../../util/functions";
+import { modifiersToBem } from "../../common/scripts/functions";
 
 export type ButtonType = 'box' | 'outline' | 'negative' | 'inline'
 export type ButtonSize = 'small' | 'medium' | 'large'
 export type ButtonPriority = 'primary' | 'secondary' | 'tertiary'
+export type ButtonState = 'enabled' | 'disable' | 'loading'
 
 @customElement('gr-button')
 export class GrButton extends LitElement {
@@ -13,7 +14,7 @@ export class GrButton extends LitElement {
 	static styles = [unsafeCSS(styles)]
 
 	@property()
-	label?: string
+	label: string = ""
 
 	@property()
 	type?: ButtonType = 'box'
@@ -24,11 +25,15 @@ export class GrButton extends LitElement {
 	@property()
 	priority?: ButtonPriority = 'primary'
 
+	@property()
+	state?: ButtonState = 'enabled'
+
 	private modifierStyle = () => {
 		return modifiersToBem('button', [
 			this.type,
 			this.size,
-			this.priority
+			this.priority,
+			this.state
 		])
 	}
 

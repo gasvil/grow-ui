@@ -7,11 +7,16 @@
 
 	/* Colors */
 	--gr-primary-color: #2BBCBC;
+	--gr-primary-color-opacity: #2BBCBC4D;
 	--gr-secondary-color: #7460EE;
+	--gr-secondary-color-opacity: #7460EE4D;
 	--gr-tertiary-color: #BC712B;
+	--gr-tertiary-color-opacity: #BC712B4D;
+	--gr-disabled-color-primary: #e1e1e1;
+	--gr-disabled-color-secondary: #a7a7a7;
 
 	/* Decorations */
 	--gr-corner-radius: 5px;
-	--gr-border-thickness: 1px;	
+	--gr-border-thickness: 2px;
 
 }

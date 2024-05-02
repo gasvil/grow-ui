@@ -5,7 +5,8 @@ export interface ButtonProps {
   label?: string,
   type?: string,
   size?: string,
-  priority?: string
+  priority?: string,
+  state?: string
 }
 
 export const GrButton = (props: ButtonProps) => {
@@ -15,6 +16,7 @@ export const GrButton = (props: ButtonProps) => {
       type = ${props.type ?? 'box'}
       size = ${props.size ?? 'medium'}
       priority = ${props.priority ?? 'primary'}
+      state = ${props.state ?? 'enabled'}
     ></gr-button>
   `
 }
