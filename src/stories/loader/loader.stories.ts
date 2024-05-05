@@ -6,6 +6,22 @@ const meta = {
   tags: ["autodocs"],
   render: (args: LoaderProps) => GrLoader(args),
   argTypes: {
+    size: {
+      description: "Tamaño del loader",
+      type: { name: "number" },
+      control: { type: "number" },
+      table: {
+        defaultValue: { summary: "20" }
+      }
+    },
+    thickness: {
+      description: "Ancho de línea del loader",
+      type: { name: "number" },
+      control: { type: "number" },
+      table: {
+        defaultValue: { summary: "3" }
+      }
+    },
     priority: {
       description: "Color del loader en base a su prioridad",
       type: { name: "primary | secondary | tertiary" },
@@ -20,7 +36,7 @@ const meta = {
       type: { name: "boolean" },
       control: { type: "boolean" },
       table: {
-        defaultValue: { summary: "false" }
+        defaultValue: { summary: false }
       }
     }
   }
@@ -29,6 +45,17 @@ const meta = {
 export default meta
 type Story = StoryObj
 
-export const Primary: Story = {
+export const Default: Story = {
+  args: {
+    negative: false
+  }
+}
 
+export const Negative: Story = {
+  args: {
+    negative: true
+  },
+  parameters: {
+    backgrounds: { default: 'dark' }
+  }
 }

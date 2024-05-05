@@ -1,5 +1,6 @@
 import { StoryObj } from "@storybook/web-components";
 import { ButtonProps, GrButton } from "./button.comp";
+import { html } from "lit";
 
 const meta = {
 	title: "Grow/Button",
@@ -9,10 +10,7 @@ const meta = {
 		label: {
 			description: "Texto que se muestra dentro del botón",
 			control: { type: 'text' },
-			type: {
-				required: true,
-				name: "string",
-			}
+			type: { name: "string" },
 		},
 		type: {
 			description: "Estilo del contenedor del botón",
@@ -49,13 +47,72 @@ const meta = {
 			table: {
 				defaultValue: { summary: "enabled" }
 			}
+		},
+		customContent: {
+			description: "Reemplazará cualquier contenido para permitir el control total al integrador.",
+			name: "custom-content",
+			type: { name: "boolean" },
+			control: { name: "boolean" },
+			table: {
+				defaultValue: { summary: false }
+			}
+		},
+		content: {
+			description: "Ingresa el contenido HTML para personalizar el botón. Acompañar el contenido de la propiedad custom-content en true",
+			name: "slot",
+			type: { name: "HTML" },
+			control: { type: "text" }
 		}
 	}
 }
 
 export default meta
-type Story = StoryObj
 
-export const Primary: Story = {
+export const Default: StoryObj = {
+	args: {
+		label: "Button",
+	}
+}
 
+export const Types: StoryObj = {
+	parameters: {
+    backgrounds: { default: 'dark' }
+  },
+	render: (args) => html`
+		${GrButton({label: 'Box Button', type: 'box', ...args})}
+		${GrButton({label: 'Outline Button', type: 'outline', ...args})}
+		${GrButton({label: 'Negative Button', type: 'negative', ...args})}
+		${GrButton({label: 'Inline Button', type: 'inline', ...args})}
+	`
+}
+
+export const Sizes: StoryObj = {
+	render: (args) => html`
+		${GrButton({label: 'Small Button', size: 'small', ...args})}
+		${GrButton({label: 'Medium Button', size: 'medium', ...args})}
+		${GrButton({label: 'Large Button', size: 'large', ...args})}
+	`
+}
+
+export const Priorities: StoryObj = {
+	render: (args) => html`
+		${GrButton({label: 'Primary Button', priority: 'primary', ...args})}
+		${GrButton({label: 'Secondary Button', priority: 'secondary', ...args})}
+		${GrButton({label: 'Tertiary Button', priority: 'tertiary', ...args})}
+	`
+}
+
+export const States: StoryObj = {
+	render: (args) => html`
+		${GrButton({label: 'Enabled Button', state: 'enabled', ...args})}
+		${GrButton({label: 'Disabled Button', state: 'disabled', ...args})}
+		${GrButton({state: 'loading', ...args})}
+	`
+}
+
+export const CustomContent: StoryObj = {
+	args: {
+		customContent: true,
+		content: "<span>Custom</span> <span>content</span>"
+	}
 }

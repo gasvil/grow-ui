@@ -12,8 +12,8 @@
 	--gr-secondary-color-opacity: #7460EE4D;
 	--gr-tertiary-color: #BC712B;
 	--gr-tertiary-color-opacity: #BC712B4D;
-	--gr-disabled-color-primary: #e1e1e1;
-	--gr-disabled-color-secondary: #a7a7a7;
+	--gr-disabled-color-background: #e1e1e1;
+	--gr-disabled-color-text: #a7a7a7;
 
 	/* Decorations */
 	--gr-corner-radius: 5px;

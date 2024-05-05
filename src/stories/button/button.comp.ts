@@ -1,22 +1,26 @@
-import { html } from "lit"
-import "../../components/button/button";
+import "@components/button/button";
 
 export interface ButtonProps {
   label?: string,
   type?: string,
   size?: string,
   priority?: string,
-  state?: string
+  state?: string,
+  customContent?: boolean
+  content?: string
 }
 
 export const GrButton = (props: ButtonProps) => {
-  return html`
-    <gr-button
-      label = ${props.label ?? "Button"}
-      type = ${props.type ?? 'box'}
-      size = ${props.size ?? 'medium'}
-      priority = ${props.priority ?? 'primary'}
-      state = ${props.state ?? 'enabled'}
-    ></gr-button>
-  `
+  const grButton = document.createElement('gr-button')
+  
+  props.label && grButton.setAttribute('label', props.label)
+  props.type && grButton.setAttribute('type', props.type)
+  props.size && grButton.setAttribute('size', props.size)
+  props.priority && grButton.setAttribute('priority', props.priority)
+  props.state && grButton.setAttribute('state', props.state)
+  props.customContent === true && grButton.setAttribute('custom-content', '')
+
+  props.content && (grButton.innerHTML = props.content)
+
+  return grButton
 }

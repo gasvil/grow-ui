@@ -1,6 +1,6 @@
 .gr-button {
 	font-family: var(--gr-font);
-	font-size: var(--gr-font-size);
+	font-size: 1rem;
 	appearance: none;
 	outline: none;
 	border: none;
@@ -8,6 +8,9 @@
 	cursor: pointer;
 	border-radius: var(--gr-corner-radius);
 	user-select: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .gr-button:active {
@@ -18,6 +21,7 @@
 .gr-button--small:not(.gr-button--inline) {
 	height: 38px;
 	padding: 0 20px;
+	font-size: 0.875rem;
 }
 
 .gr-button--medium:not(.gr-button--inline) {
@@ -33,16 +37,19 @@
 /* Types box + Priority */
 .gr-button--box.gr-button--primary {
 	background-color: var(--gr-primary-color);
+	border: var(--gr-border-thickness) solid var(--gr-primary-color);
 	color: white;
 }
 
 .gr-button--box.gr-button--secondary {
 	background-color: var(--gr-secondary-color);
+	border: var(--gr-border-thickness) solid var(--gr-secondary-color);
 	color: white;
 }
 
 .gr-button--box.gr-button--tertiary {
 	background-color: var(--gr-tertiary-color);
+	border: var(--gr-border-thickness) solid var(--gr-tertiary-color);
 	color: white;
 }
 
@@ -65,16 +72,19 @@
 /* Types negative + Priority primary */
 .gr-button--negative.gr-button--primary {
 	background-color: white;
+	border: var(--gr-border-thickness) solid white;
 	color: var(--gr-primary-color)
 }
 
 .gr-button--negative.gr-button--secondary {
 	background-color: white;
+	border: var(--gr-border-thickness) solid white;
 	color: var(--gr-secondary-color)
 }
 
 .gr-button--negative.gr-button--tertiary {
 	background-color: white;
+	border: var(--gr-border-thickness) solid white;
 	color: var(--gr-tertiary-color)
 }
 
@@ -91,21 +101,25 @@
 	color: var(--gr-tertiary-color);
 }
 
+/* State disabled + State loading */
+.gr-button--disabled, .gr-button--loading {
+	pointer-events: none;
+}
+
 /* States disabled + Type */
 .gr-button--disabled.gr-button--box,
 .gr-button--disabled.gr-button--negative {
-	pointer-events: none;
-	background-color: var(--gr-disabled-color-primary);
-	color: var(--gr-disabled-color-secondary);
+	background-color: var(--gr-disabled-color-background);
+	border-color: var(--gr-disabled-color-background);
+	color: var(--gr-disabled-color-text);
 }
 
 .gr-button--disabled.gr-button--outline {
-	pointer-events: none;
-	border-color: var(--gr-disabled-color-primary);
-	color: var(--gr-disabled-color-secondary);
+	border-color: var(--gr-disabled-color-background);
+	border-color: var(--gr-disabled-color-background);
+	color: var(--gr-disabled-color-text);
 }
 
 .gr-button--disabled.gr-button--inline {
-	pointer-events: none;
-	color: var(--gr-disabled-color-secondary);
+	color: var(--gr-disabled-color-text);
 }
