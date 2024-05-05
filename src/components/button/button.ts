@@ -3,7 +3,7 @@ import { customElement, property, query } from "lit/decorators.js";
 import style from "./button.css?inline"
 import global from "@commons/styles/global.css?inline"
 import { modifiersToBem } from "../../commons/scripts/functions";
-import "../loader/loader"
+import "@components/loader/loader"
 
 export type ButtonType = 'box' | 'outline' | 'negative' | 'inline'
 export type ButtonSize = 'small' | 'medium' | 'large'
@@ -27,7 +27,7 @@ export class GrButton extends LitElement {
 	@property()
 	priority: ButtonPriority = 'primary'
 
-	@property()
+	@property({reflect: true})
 	state: ButtonState = 'enabled'
 
 	@property({type: Boolean, attribute: "custom-content"})
