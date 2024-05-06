@@ -1,5 +1,5 @@
 import { StoryObj } from "@storybook/web-components";
-import { GrLoader, LoaderProps } from "./loader.comp";
+import { GrLoader, LoaderProps } from "./loader.template";
 
 const meta = {
   title: "Grow/Loader",

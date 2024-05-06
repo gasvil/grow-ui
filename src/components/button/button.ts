@@ -1,8 +1,8 @@
-import { LitElement, PropertyValues, html, unsafeCSS } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import {html, LitElement, PropertyValues, unsafeCSS} from "lit";
+import {customElement, property, query} from "lit/decorators.js";
 import style from "./button.css?inline"
 import global from "@commons/styles/global.css?inline"
-import { modifiersToBem } from "../../commons/scripts/functions";
+import {modifiersToBem} from "../../commons/scripts/functions";
 import "@components/loader/loader"
 
 export type ButtonType = 'box' | 'outline' | 'negative' | 'inline'
@@ -13,78 +13,70 @@ export type ButtonState = 'enabled' | 'disabled' | 'loading'
 @customElement('gr-button')
 export class GrButton extends LitElement {
 
-	static styles = [unsafeCSS(global), unsafeCSS(style)]
+    static styles = [unsafeCSS(global), unsafeCSS(style)]
 
-	@property()
-	label?: string
+    @property()
+    type: ButtonType = 'box'
 
-	@property()
-	type: ButtonType = 'box'
+    @property()
+    size: ButtonSize = 'medium'
 
-	@property()
-	size: ButtonSize = 'medium'
+    @property()
+    priority: ButtonPriority = 'primary'
 
-	@property()
-	priority: ButtonPriority = 'primary'
+    @property({reflect: true})
+    state: ButtonState = 'enabled'
 
-	@property({reflect: true})
-	state: ButtonState = 'enabled'
+    @query('.gr-button')
+    host?: HTMLElement
 
-	@property({type: Boolean, attribute: "custom-content"})
-	customContent: Boolean = false
+    private modifierStyle = () => {
+        return modifiersToBem('button', [
+            this.type,
+            this.size,
+            this.priority,
+            this.state
+        ])
+    }
 
-	@query('.gr-button')
-	host?: HTMLElement
+    private setLoadingButtonSize = (changedProperties: PropertyValues) => {
+        setTimeout(() => {
+            if (changedProperties.has('state') && this.state == 'loading' && this.host) {
+                console.log(this.host)
+                const sizes = this.host.getBoundingClientRect()
+                const width = sizes.width
+                this.host.style.width = `${width}px`
+            } else {
+                this.host?.style.removeProperty('width')
+            }
+        }, 100)
+    }
 
-	private modifierStyle = () => {
-		return modifiersToBem('button', [
-			this.type,
-			this.size,
-			this.priority,
-			this.state
-		])
-	}
+    private setContent = () => {
+        if (this.state == 'loading') {
+            return html`<gr-loader negative size="15"></gr-loader>`
+        } else {
+            return html`<slot></slot>`
+        }
+    }
 
-	private setContent() {
-		let content
-		if (this.customContent) {
-			content = null
-		} else if (this.state == 'loading') {
-			content = html`<gr-loader negative size=15></gr-loader>`
-		} else {
-			content = this.label
-		}
-		return content
-	}
+    shouldUpdate(changedProperties: PropertyValues) {
+        this.setLoadingButtonSize(changedProperties)
+        return true
+    }
 
-	private setLoadingButtonSize = (changedProperties: PropertyValues) => {
-		if (changedProperties.has('state') && this.state == 'loading' && this.host) {
-			const sizes = this.host.getBoundingClientRect()
-			const width = sizes.width
-			this.host.style.width = `${width}px`
-		} else {
-			this.host?.style.removeProperty('width')
-		}
-	}
-
-	shouldUpdate(changedProperties: PropertyValues) {
-		this.setLoadingButtonSize(changedProperties)
-		return true
-	}
-
-	render() {
-		return html`
-			<button class="${this.modifierStyle()}">
-				${this.setContent()}
-				<slot></slot>
-			</button>
-		`;
-	}
+    render() {
+        return html`
+            <button class="${this.modifierStyle()}">
+                ${this.setContent()}
+            </button>
+        `;
+    }
 
 }
 
 declare global {
-	interface HTMLElementTagNameMap {
-		'gr-button': GrButton
-	}
+    interface HTMLElementTagNameMap {
+        'gr-button': GrButton
+    }
 }
