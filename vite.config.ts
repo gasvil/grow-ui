@@ -7,5 +7,11 @@ export default defineConfig({
       '@components': path.resolve(__dirname, 'src/components'),
       '@commons': path.resolve(__dirname, 'src/commons')
     }
+  },
+  build: {
+    lib: {
+      entry: 'src/index.ts',
+      formats: ['es']
+    }
   }
 })
