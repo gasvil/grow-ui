@@ -64,18 +64,18 @@ export const Types: StoryObj = {
     },
     args: {},
     render: (args) => html`
-        ${GrButton({type: 'box', ...args})}
-        ${GrButton({type: 'outline', ...args})}
-        ${GrButton({type: 'negative', ...args})}
-        ${GrButton({type: 'inline', ...args})}
+        ${GrButton({content: 'Box button', type: 'box', ...args})}
+        ${GrButton({content: 'Outline button', type: 'outline', ...args})}
+        ${GrButton({content: 'Negative button', type: 'negative', ...args})}
+        ${GrButton({content: 'Inline button', type: 'inline', ...args})}
     `
 }
 
 export const Sizes: StoryObj = {
     render: (args) => html`
-        ${GrButton({size: 'small', ...args})}
-        ${GrButton({size: 'medium', ...args})}
-        ${GrButton({size: 'large', ...args})}
+        ${GrButton({content: 'Small button', size: 'small', ...args})}
+        ${GrButton({content: 'Medium button', size: 'medium', ...args})}
+        ${GrButton({content: 'Large button', size: 'large', ...args})}
     `
 }
 
