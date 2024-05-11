@@ -1,7 +1,7 @@
 import {html, LitElement, PropertyValues, unsafeCSS} from "lit";
 import {customElement, property, query} from "lit/decorators.js";
-import style from "./button.css?inline"
 import global from "@commons/styles/global.css?inline"
+import style from "./button.css?inline"
 import {modifiersToBem} from "../../commons/scripts/functions";
 import "@components/loader/loader"
 
@@ -33,6 +33,14 @@ export class GrButton extends LitElement {
     @query('.gr-button')
     host?: HTMLElement
 
+    // createRenderRoot() {
+    //     const separateClass = this.modifierStyle().split(' ')
+    //     separateClass.forEach(it => {
+    //         this.classList.add(it)
+    //     })
+    //     return this
+    // }
+
     private modifierStyle = () => {
         return modifiersToBem('button', [
             this.type,
@@ -45,7 +53,6 @@ export class GrButton extends LitElement {
     private setLoadingButtonSize = (changedProperties: PropertyValues) => {
         setTimeout(() => {
             if (changedProperties.has('state') && this.state == 'loading' && this.host) {
-                console.log(this.host)
                 const sizes = this.host.getBoundingClientRect()
                 const width = sizes.width
                 this.host.style.width = `${width}px`
@@ -75,14 +82,13 @@ export class GrButton extends LitElement {
             return html`
                 ${this.setIcons()[0]}
                 <slot></slot>
-                <i class="fas fa-window-restore"></i>
             `
         }
     }
 
     render() {
         return html`
-            <button class="${this.modifierStyle()}">
+            <button type="button" class="${this.modifierStyle()}">
                 ${this.setContent()}
             </button>
         `;

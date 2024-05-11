@@ -1,5 +1,5 @@
 import path from 'path';
-import { defineConfig } from 'vite';
+import {defineConfig} from 'vite';
 
 export default defineConfig({
   resolve: {
@@ -9,9 +9,15 @@ export default defineConfig({
     }
   },
   build: {
+    rollupOptions: {
+      output: {
+        entryFileNames: 'grow-components.js',
+        assetFileNames: 'grow-components.css'
+      }
+    },
     lib: {
-      entry: 'src/index.ts',
+      entry: path.resolve(__dirname, 'src/index.ts'),
       formats: ['es']
-    }
+    },
   }
 })
