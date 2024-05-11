@@ -24,8 +24,11 @@ export class GrButton extends LitElement {
     @property()
     priority: ButtonPriority = 'primary'
 
-    @property({reflect: true})
+    @property()
     state: ButtonState = 'enabled'
+
+    @property({attribute: 'leading-icon'})
+    leadingIcon?: string
 
     @query('.gr-button')
     host?: HTMLElement
@@ -52,17 +55,29 @@ export class GrButton extends LitElement {
         }, 100)
     }
 
+    shouldUpdate(changedProperties: PropertyValues) {
+        this.setLoadingButtonSize(changedProperties)
+        return true
+    }
+
+    private setIcons() {
+        const icons = []
+        if (this.leadingIcon) {
+            icons.push(html`<i class="${this.leadingIcon}"></i>`)
+        }
+        return icons
+    }
+
     private setContent = () => {
         if (this.state == 'loading') {
             return html`<gr-loader negative size="15"></gr-loader>`
         } else {
-            return html`<slot></slot>`
+            return html`
+                ${this.setIcons()[0]}
+                <slot></slot>
+                <i class="fas fa-window-restore"></i>
+            `
         }
-    }
-
-    shouldUpdate(changedProperties: PropertyValues) {
-        this.setLoadingButtonSize(changedProperties)
-        return true
     }
 
     render() {

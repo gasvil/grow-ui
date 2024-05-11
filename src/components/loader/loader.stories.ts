@@ -1,10 +1,10 @@
 import { StoryObj } from "@storybook/web-components";
-import { GrLoader, LoaderProps } from "./loader.template";
+import { GrLoaderTemplate, LoaderProps } from "./loader.template";
 
 const meta = {
   title: "Grow/Loader",
   tags: ["autodocs"],
-  render: (args: LoaderProps) => GrLoader(args),
+  render: (args: LoaderProps) => GrLoaderTemplate(args),
   argTypes: {
     size: {
       description: "Tamaño del loader",

@@ -7,13 +7,13 @@ export interface LoaderProps {
   negative: boolean
 }
 
-export const GrLoader = (props: LoaderProps) => {
+export const GrLoaderTemplate = (props: LoaderProps) => {
   const grLoader = document.createElement('gr-loader')
 
   props.size && grLoader.setAttribute('size', props.size.toString())
   props.thickness && grLoader.setAttribute('thickness', props.thickness.toString())
   props.priority && grLoader.setAttribute('priority', props.priority)
-  props.negative === true && grLoader.setAttribute('negative', '')
+  props.negative && grLoader.setAttribute('negative', '')
 
   return grLoader
 }

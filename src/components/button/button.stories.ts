@@ -1,11 +1,11 @@
 import {StoryObj} from "@storybook/web-components";
-import {ButtonArgs, GrButton} from "./button.template";
+import {ButtonArgs, GrButtonTemplate} from "./button.template";
 import {html} from "lit";
 
 export default {
     title: "Grow/Button",
     tags: ["autodocs"],
-    render: (args: ButtonArgs) => GrButton(args),
+    render: (args: ButtonArgs) => GrButtonTemplate(args),
     argTypes: {
         type: {
             description: "Estilo del contenedor del botón",
@@ -43,6 +43,12 @@ export default {
                 defaultValue: {summary: "enabled"}
             }
         },
+        leadingIcon: {
+            description: "Ícono que se mostrará al lado izquierdo del botón.",
+            name: "leading-icon",
+            type: {name: "string"},
+            control: {type: "text"}
+        },
         content: {
             description: "Ingresa el contenido HTML para personalizar el botón. Acompañar el contenido de la propiedad custom-content en true",
             name: "slot",
@@ -55,6 +61,7 @@ export default {
 export const Default: StoryObj = {
     args: {
         content: "Default button",
+        leadingIcon: "fas fa-window-restore"
     }
 }
 
@@ -62,35 +69,34 @@ export const Types: StoryObj = {
     parameters: {
         backgrounds: {default: 'dark'}
     },
-    args: {},
     render: (args) => html`
-        ${GrButton({content: 'Box button', type: 'box', ...args})}
-        ${GrButton({content: 'Outline button', type: 'outline', ...args})}
-        ${GrButton({content: 'Negative button', type: 'negative', ...args})}
-        ${GrButton({content: 'Inline button', type: 'inline', ...args})}
+        ${GrButtonTemplate({content: 'Box button', type: 'box', ...args})}
+        ${GrButtonTemplate({content: 'Outline button', type: 'outline', ...args})}
+        ${GrButtonTemplate({content: 'Negative button', type: 'negative', ...args})}
+        ${GrButtonTemplate({content: 'Inline button', type: 'inline', ...args})}
     `
 }
 
 export const Sizes: StoryObj = {
     render: (args) => html`
-        ${GrButton({content: 'Small button', size: 'small', ...args})}
-        ${GrButton({content: 'Medium button', size: 'medium', ...args})}
-        ${GrButton({content: 'Large button', size: 'large', ...args})}
+        ${GrButtonTemplate({content: 'Small button', size: 'small', ...args})}
+        ${GrButtonTemplate({content: 'Medium button', size: 'medium', ...args})}
+        ${GrButtonTemplate({content: 'Large button', size: 'large', ...args})}
     `
 }
 
 export const Priorities: StoryObj = {
     render: (args) => html`
-        ${GrButton({priority: 'primary', ...args})}
-        ${GrButton({priority: 'secondary', ...args})}
-        ${GrButton({priority: 'tertiary', ...args})}
+        ${GrButtonTemplate({content: 'Primary button', priority: 'primary', ...args})}
+        ${GrButtonTemplate({content: 'Secondary button', priority: 'secondary', ...args})}
+        ${GrButtonTemplate({content: 'Tertiary button', priority: 'tertiary', ...args})}
     `
 }
 
 export const States: StoryObj = {
     render: (args) => html`
-        ${GrButton({state: 'enabled', ...args})}
-        ${GrButton({state: 'disabled', ...args})}
-<!--        ${GrButton({state: 'loading', ...args})}-->
+        ${GrButtonTemplate({content: 'Enabled button', state: 'enabled', ...args})}
+        ${GrButtonTemplate({content: 'Disabled button', state: 'disabled', ...args})}
+        ${GrButtonTemplate({content: 'Loading button', state: 'loading', ...args})}
     `
 }
