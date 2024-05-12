@@ -7,6 +7,11 @@ export default {
     tags: ["autodocs"],
     render: (args: ButtonArgs) => GrButtonTemplate(args),
     argTypes: {
+        label: {
+            description: "Texto que se muestra dentro del botón.",
+            type: {name: "string"},
+            control: {type: "text"},
+        },
         type: {
             description: "Estilo del contenedor del botón",
             type: {name: "box | outline | negative | inline",},
@@ -48,12 +53,6 @@ export default {
             name: "leading-icon",
             type: {name: "string"},
             control: {type: "text"}
-        },
-        content: {
-            description: "Ingresa solo un texto o cualquier contenido HTML para personalizar el botón.",
-            name: "slot",
-            type: {name: "HTML"},
-            control: {type: "text"}
         }
     }
 }
@@ -61,7 +60,7 @@ export default {
 export let Default: StoryObj;
 Default = {
     args: {
-        content: "Default button",
+        label: "Default button",
         leadingIcon: "fas fa-window-restore"
     }
 };
@@ -72,36 +71,36 @@ Types = {
         backgrounds: {default: 'dark'}
     },
     render: (args) => html`
-        ${GrButtonTemplate({content: 'Box button', type: 'box', ...args})}
-        ${GrButtonTemplate({content: 'Outline button', type: 'outline', ...args})}
-        ${GrButtonTemplate({content: 'Negative button', type: 'negative', ...args})}
-        ${GrButtonTemplate({content: 'Inline button', type: 'inline', ...args})}
+        ${GrButtonTemplate({label: 'Box button', type: 'box', ...args})}
+        ${GrButtonTemplate({label: 'Outline button', type: 'outline', ...args})}
+        ${GrButtonTemplate({label: 'Negative button', type: 'negative', ...args})}
+        ${GrButtonTemplate({label: 'Inline button', type: 'inline', ...args})}
     `
 };
 
 export let Sizes: StoryObj;
 Sizes = {
     render: (args) => html`
-        ${GrButtonTemplate({content: 'Small button', size: 'small', ...args})}
-        ${GrButtonTemplate({content: 'Medium button', size: 'medium', ...args})}
-        ${GrButtonTemplate({content: 'Large button', size: 'large', ...args})}
+        ${GrButtonTemplate({label: 'Small button', size: 'small', ...args})}
+        ${GrButtonTemplate({label: 'Medium button', size: 'medium', ...args})}
+        ${GrButtonTemplate({label: 'Large button', size: 'large', ...args})}
     `
 };
 
 export let Priorities: StoryObj;
 Priorities = {
     render: (args) => html`
-        ${GrButtonTemplate({content: 'Primary button', priority: 'primary', ...args})}
-        ${GrButtonTemplate({content: 'Secondary button', priority: 'secondary', ...args})}
-        ${GrButtonTemplate({content: 'Tertiary button', priority: 'tertiary', ...args})}
+        ${GrButtonTemplate({label: 'Primary button', priority: 'primary', ...args})}
+        ${GrButtonTemplate({label: 'Secondary button', priority: 'secondary', ...args})}
+        ${GrButtonTemplate({label: 'Tertiary button', priority: 'tertiary', ...args})}
     `
 };
 
 export let States: StoryObj;
 States = {
     render: (args) => html`
-        ${GrButtonTemplate({content: 'Enabled button', state: 'enabled', ...args})}
-        ${GrButtonTemplate({content: 'Disabled button', state: 'disabled', ...args})}
-        ${GrButtonTemplate({content: 'Loading button', state: 'loading', ...args})}
+        ${GrButtonTemplate({label: 'Enabled button', state: 'enabled', ...args})}
+        ${GrButtonTemplate({label: 'Disabled button', state: 'disabled', ...args})}
+        ${GrButtonTemplate({label: 'Loading button', state: 'loading', ...args})}
     `
 };
