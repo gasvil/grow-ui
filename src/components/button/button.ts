@@ -1,5 +1,5 @@
-import {html, LitElement, PropertyValues} from "lit";
-import {customElement, property, query} from "lit/decorators.js";
+import {html, LitElement, PropertyValues, TemplateResult} from "lit";
+import {customElement, property} from "lit/decorators.js";
 import {modifiersToBem} from "../../commons/scripts/functions";
 import "@components/loader/loader"
 import './button.css'
@@ -12,10 +12,8 @@ export type ButtonState = 'enabled' | 'disabled' | 'loading'
 @customElement('gr-button')
 export class GrButton extends LitElement {
 
-    // static styles = [unsafeCSS(global), unsafeCSS(style)]
-
     @property()
-    label: String = ''
+    content?: string
 
     @property()
     type: ButtonType = 'box'
@@ -32,8 +30,21 @@ export class GrButton extends LitElement {
     @property({attribute: 'leading-icon'})
     leadingIcon?: string
 
-    @query('.gr-button')
-    host?: HTMLElement
+    @property({attribute: 'trailing-icon'})
+    trailingIcon?: string
+
+    @property()
+    width?: number | 'full'
+
+    private buttonIcons: {
+        leading?: TemplateResult,
+        trailing?: TemplateResult
+    } = {}
+
+    constructor() {
+        super()
+        this.setIcons()
+    }
 
     createRenderRoot() {
         return this
@@ -41,6 +52,8 @@ export class GrButton extends LitElement {
 
     shouldUpdate(changedProperties: PropertyValues) {
         this.setLoadingButtonSize(changedProperties)
+        this.setIcons()
+        this.setWidth()
         return true
     }
 
@@ -62,23 +75,30 @@ export class GrButton extends LitElement {
     }
 
     private setLoadingButtonSize = (changedProperties: PropertyValues) => {
-        setTimeout(() => {
-            if (changedProperties.has('state') && this.state == 'loading' && this.host) {
-                const sizes = this.host.getBoundingClientRect()
-                const width = sizes.width
-                this.host.style.width = `${width}px`
-            } else {
-                this.host?.style.removeProperty('width')
-            }
-        }, 100)
+        if (changedProperties.has('state') && this.state == 'loading' && this) {
+            const sizes = this.getBoundingClientRect()
+            const width = sizes.width
+            this.style.width = `${width}px`
+        } else {
+            this?.style.removeProperty('width')
+        }
     }
 
     private setIcons() {
-        const icons = []
-        if (this.leadingIcon) {
-            icons.push(html`<i class="${this.leadingIcon}"></i>`)
+        this.leadingIcon && (this.buttonIcons.leading = html`<i class="${this.leadingIcon}"></i>`)
+        this.trailingIcon && (this.buttonIcons.trailing = html`<i class="${this.trailingIcon}"></i>`)
+    }
+
+    private setWidth() {
+        if (this.width == 'full') {
+            console.log('full width button')
+        } else if (this.width != undefined && !isNaN(parseInt(this.width.toString()))) {
+            const button: HTMLElement | null = this.querySelector('.gr-button')
+            console.log(this.querySelector('button'))
+            if (button) {
+                button.style.width = `${this.width}px`
+            }
         }
-        return icons
     }
 
     private setContent = () => {
@@ -87,8 +107,9 @@ export class GrButton extends LitElement {
                 <gr-loader negative size="15"></gr-loader>`
         } else {
             return html`
-                ${this.setIcons()[0]}
-                ${this.label}
+                ${this.buttonIcons.leading}
+                <span class="gr-button__content" .innerHTML="${this.content}"></span>
+                ${this.buttonIcons.trailing}
             `
         }
     }

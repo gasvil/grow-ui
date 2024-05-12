@@ -1,0 +1,31 @@
+:root {
+
+    /*Font*/
+    --font: var(--gr-font, sans-serif);
+    --font-weight: var(--gr-font-weight, 400);
+
+
+    /*Colors*/
+    --primary-color: var(--gr-primary-color, #2BBCBC);
+    --primary-color-opacity: var(--gr-primary-color-opacity, #2BBCBC4D);
+    --primary-color-hover: var(--gr-primary-color-hover, #209797);
+
+    --secondary-color: var(--gr-secondary-color, #7460EE);
+    --secondary-color-opacity: var(--gr-secondary-color-opacity, #7460EE4D);
+    --secondary-color-hover: var(--gr-secondary-color-hover, #4f3ac1);
+
+    --tertiary-color: var(--gr-tertiary-color, #BC712B);
+    --tertiary-color-opacity: var(--gr-tertiary-color-opacity, #BC712B4D);
+    --tertiary-color-hover: var(--gr-tertiary-color-hover, #8f5219);
+
+    --disabled-color-background: var(--gr-disabled-color-background, #e1e1e1);
+    --disabled-color-text: var(--gr-disabled-color-text, #a7a7a7);
+
+    /*Transitions*/
+    --transition-hover: var(--gr-transition-hover, 0.15s);
+
+    /*Decorations*/
+    --corner-radius: var(--gr-corner-radius, 5px);
+    --border-thickness: var(--gr-border-thickness, 2px);
+
+}
