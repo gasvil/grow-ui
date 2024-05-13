@@ -1,5 +1,5 @@
 import {StoryObj} from "@storybook/web-components";
-import {ButtonArgs, GrButtonTemplate} from "./button.template";
+import {ButtonArgs, GrButtonTemplate, handleClick} from "./button.template";
 import {html} from "lit";
 
 export default {
@@ -10,6 +10,12 @@ export default {
         backgrounds: {default: 'light'}
     },
     argTypes: {
+        refId: {
+            description: "Define un id que será aplicado al botón contenido dentro de la etiqueta gr-button",
+            name: "ref-id",
+            type: {name: "string"},
+            control: {type: "text"},
+        },
         content: {
             description: "Contenido del botón, ingresa solo un texto o un contenido HTML más complejo.",
             type: {name: "HTML | string"},
@@ -63,12 +69,27 @@ export default {
             type: {name: "string"},
             control: {type: "text"}
         },
-        width: {
-            description: "Configura el tamaño del botón. Puedes usar un valor específico en px o usar el valor full para tomar el ancho disponible.",
-            type: {name: "number | full"},
-            control: {type: "text"},
+        href: {
+            description: "Url a donde se desea navegar",
+            type: {name: "URL"},
+            control: {type: "text"}
+        },
+        target: {
+            description: "Tipo de apertura de la url ingresada.",
+            type: {name: "_blank | _self | _parent | _top"},
+            control: {type: "select"},
+            options: ['_blank', '_self', '_parent', '_top'],
+            table: {
+                "defaultValue": {summary: "_self"}
+            }
+        },
+        onClick: {
+            description: "Función a ejecutar al dar click sobre el botón.",
+            name: "gr-click",
+            type: {name: "((event: Event) => void)"},
+            control: {type: null},
         }
-    }
+    },
 }
 
 export let Default: StoryObj;
@@ -117,3 +138,36 @@ States = {
         ${GrButtonTemplate({content: 'Loading button', state: 'loading', ...args})}
     `
 };
+
+export let Icons: StoryObj
+Icons = {
+    render: (args) => html`
+        ${GrButtonTemplate({content: 'Leading icon button', leadingIcon: 'fa-solid fa-star', ...args})}
+        ${GrButtonTemplate({content: 'Leading icon button', trailingIcon: 'fa-solid fa-star', ...args})}
+        ${GrButtonTemplate({leadingIcon: 'fa-solid fa-star', ...args})}
+    `
+}
+
+export let Anchors: StoryObj
+Anchors = {
+    render: (args) => html`
+        ${GrButtonTemplate({content: 'Anchor button', href: 'https://www.google.com', target: '_blank', ...args})}
+    `
+}
+
+export let Click: StoryObj
+Click = {
+    args: {
+        refId: 'gr-button-click',
+        onClick: handleClick
+    },
+    render: (args) => html`
+        ${GrButtonTemplate({content: 'Click to action', ...args})}
+        <script type="text/javascript">
+            const button = document.querySelector('#gr-button-click')
+            button.addEventListener('gr-click', () => {
+                alert("Click from grow button")
+            })
+        </script>
+    `
+}

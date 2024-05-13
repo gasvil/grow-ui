@@ -10,11 +10,16 @@
     cursor: pointer;
     border-radius: var(--corner-radius);
     user-select: none;
-    display: flex;
+    text-decoration: none;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     transition: background-color var(--transition-hover), border-color var(--transition-hover);
+}
+
+.gr-button:not(.gr-button--inline) {
+    box-shadow: var(--shadow);
 }
 
 .gr-button__content {

@@ -1,5 +1,7 @@
 :root {
 
+    --local-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1);
+
     /*Font*/
     --font: var(--gr-font, sans-serif);
     --font-weight: var(--gr-font-weight, 400);
@@ -27,5 +29,6 @@
     /*Decorations*/
     --corner-radius: var(--gr-corner-radius, 5px);
     --border-thickness: var(--gr-border-thickness, 2px);
+    --shadow: var(--gr-shadow, var(--local-shadow));
 
 }

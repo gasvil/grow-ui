@@ -8,9 +8,13 @@ export type ButtonType = 'box' | 'outline' | 'negative' | 'inline'
 export type ButtonSize = 'small' | 'medium' | 'large'
 export type ButtonPriority = 'primary' | 'secondary' | 'tertiary'
 export type ButtonState = 'enabled' | 'disabled' | 'loading'
+export type ButtonAnchorType = '_blank' | '_self' | '_parent' | '_top'
 
 @customElement('gr-button')
 export class GrButton extends LitElement {
+
+    @property({attribute: 'ref-id', reflect: true})
+    refId?: string
 
     @property()
     content?: string
@@ -34,7 +38,10 @@ export class GrButton extends LitElement {
     trailingIcon?: string
 
     @property()
-    width?: number | 'full'
+    href?: string
+
+    @property()
+    target?: ButtonAnchorType = "_self"
 
     private buttonIcons: {
         leading?: TemplateResult,
@@ -53,16 +60,37 @@ export class GrButton extends LitElement {
     shouldUpdate(changedProperties: PropertyValues) {
         this.setLoadingButtonSize(changedProperties)
         this.setIcons()
-        this.setWidth()
         return true
     }
 
     render() {
-        return html`
-            <button type="button" class="${this.modifierStyle()}">
-                ${this.setContent()}
-            </button>
-        `;
+        return this.setButtonContainer();
+    }
+
+    private setButtonContainer = () => {
+        if (this.href) {
+            return html`
+                <a
+                        id="${this.refId}"
+                        href="${this.href}"
+                        target="${this.target}"
+                        class="${this.modifierStyle()}"
+                >
+                    ${this.setContent()}
+                </a>
+            `
+        } else {
+            return html`
+                <button
+                        id="${this.refId}"
+                        type="button"
+                        class="${this.modifierStyle()}"
+                        @click="${this.handleClick}"
+                >
+                    ${this.setContent()}
+                </button>
+            `
+        }
     }
 
     private modifierStyle = () => {
@@ -89,15 +117,11 @@ export class GrButton extends LitElement {
         this.trailingIcon && (this.buttonIcons.trailing = html`<i class="${this.trailingIcon}"></i>`)
     }
 
-    private setWidth() {
-        if (this.width == 'full') {
-            console.log('full width button')
-        } else if (this.width != undefined && !isNaN(parseInt(this.width.toString()))) {
-            const button: HTMLElement | null = this.querySelector('.gr-button')
-            console.log(this.querySelector('button'))
-            if (button) {
-                button.style.width = `${this.width}px`
-            }
+    private parseHTMLContent = () => {
+        if (this.content) {
+            return html`<span class="gr-button__content" .innerHTML="${this.content}"></span>`
+        } else {
+            return ''
         }
     }
 
@@ -108,10 +132,15 @@ export class GrButton extends LitElement {
         } else {
             return html`
                 ${this.buttonIcons.leading}
-                <span class="gr-button__content" .innerHTML="${this.content}"></span>
+                ${this.parseHTMLContent()}
                 ${this.buttonIcons.trailing}
             `
         }
+    }
+
+    private handleClick = (e: Event) => {
+        const event = new CustomEvent('gr-click', e)
+        this.dispatchEvent(event)
     }
 
 }
