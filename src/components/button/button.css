@@ -17,6 +17,10 @@
     gap: 8px;
     width: 100%;
     transition: background-color var(--transition-hover), border-color var(--transition-hover);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    vertical-align: middle;
 }
 
 .gr-button:not(.gr-button--inline) {

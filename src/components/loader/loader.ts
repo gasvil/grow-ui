@@ -21,6 +21,7 @@ export class GrLoader extends LitElement {
     negative: boolean | undefined = false
 
     createRenderRoot() {
+        this.style.display = 'inline-block'
         return this
     }
 

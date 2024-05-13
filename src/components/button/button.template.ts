@@ -1,5 +1,3 @@
-import "@components/button/button";
-
 export interface ButtonArgs {
     refId?: string,
     content?: string
@@ -9,25 +7,25 @@ export interface ButtonArgs {
     state?: string,
     leadingIcon?: string,
     trailingIcon?: string,
-    width?: string,
+    width?: number | 'full',
     href?: string
     target?: string,
 }
 
-export const GrButtonTemplate = (props: ButtonArgs) => {
+export const GrButtonTemplate = (args: ButtonArgs) => {
     const grButton = document.createElement('gr-button')
 
-    props.refId && grButton.setAttribute('ref-id', props.refId)
-    props.content && grButton.setAttribute('content', props.content)
-    props.type && grButton.setAttribute('type', props.type)
-    props.size && grButton.setAttribute('size', props.size)
-    props.priority && grButton.setAttribute('priority', props.priority)
-    props.state && grButton.setAttribute('state', props.state)
-    props.leadingIcon && grButton.setAttribute('leading-icon', props.leadingIcon)
-    props.trailingIcon && grButton.setAttribute('trailing-icon', props.trailingIcon)
-    props.width && grButton.setAttribute('width', props.width)
-    props.href && grButton.setAttribute('href', props.href)
-    props.target && grButton.setAttribute('target', props.target)
+    args.refId && grButton.setAttribute('ref-id', args.refId)
+    args.content && grButton.setAttribute('content', args.content)
+    args.type && grButton.setAttribute('type', args.type)
+    args.size && grButton.setAttribute('size', args.size)
+    args.priority && grButton.setAttribute('priority', args.priority)
+    args.state && grButton.setAttribute('state', args.state)
+    args.leadingIcon && grButton.setAttribute('leading-icon', args.leadingIcon)
+    args.trailingIcon && grButton.setAttribute('trailing-icon', args.trailingIcon)
+    args.width && grButton.setAttribute('width', args.width.toString())
+    args.href && grButton.setAttribute('href', args.href)
+    args.target && grButton.setAttribute('target', args.target)
 
     return grButton
 }

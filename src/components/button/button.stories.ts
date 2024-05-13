@@ -1,6 +1,7 @@
 import {StoryObj} from "@storybook/web-components";
 import {ButtonArgs, GrButtonTemplate} from "./button.template";
 import {html} from "lit";
+import "@components/button/button"
 
 export default {
     title: "Grow/Button",
@@ -153,20 +154,34 @@ Icons = {
     `
 }
 
+export let Width: StoryObj;
+Width = {
+    render: (args) => html`
+        ${GrButtonTemplate({content: '300px Button', width: 300, ...args})}
+        <br>
+        ${GrButtonTemplate({content: '500px Button', width: 500, ...args})}
+        <br>
+        ${GrButtonTemplate({content: 'Full button', width: "full", ...args})}
+    `
+}
+
 export let Anchors: StoryObj
 Anchors = {
-    render: (args) => html`
-        ${GrButtonTemplate({content: 'Anchor button', href: 'https://www.google.com', target: '_blank', ...args})}
-    `
+    args: {
+        content: "Anchor button",
+        href: "https://www.google.com/",
+        target: "_blank",
+    }
 }
 
 export let Click: StoryObj
 Click = {
     args: {
+        content: "Click to action",
         refId: 'gr-button-click',
     },
     render: (args) => html`
-        ${GrButtonTemplate({content: 'Click to action', ...args})}
+        ${GrButtonTemplate(args)}
         <script type="text/javascript">
             const button = document.querySelector('gr-button[ref-id="gr-button-click"]')
             button.addEventListener('gr-click', _ => {

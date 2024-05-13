@@ -65,23 +65,10 @@ export class GrButton extends LitElement {
     shouldUpdate(changedProperties: PropertyValues) {
         this.setLoadingButtonSize(changedProperties)
         this.setIcons()
-        this.setWidth()
         return true
     }
 
     render() {
-        return this.setButtonContainer();
-    }
-
-    private setWidth = () => {
-        if (this.width == 'full') {
-            this.style.display = "block"
-        } else if (typeof this.width == 'number') {
-            this.style.display = `${this.width}px`
-        }
-    }
-
-    private setButtonContainer = () => {
         if (this.href) {
             return html`
                 <a
@@ -107,6 +94,16 @@ export class GrButton extends LitElement {
         }
     }
 
+    private setWidth = () => {
+        const width = this.width ?? ""
+        if (width == 'full') {
+            this.style.display = "block"
+        } else if (!isNaN(parseInt(width.toString()))) {
+            this.style.display = "block"
+            this.style.maxWidth = `${this.width}px`
+        }
+    }
+
     private modifierStyle = () => {
         return modifiersToBem('button', [
             this.type,
@@ -127,8 +124,8 @@ export class GrButton extends LitElement {
     }
 
     private setIcons() {
-        this.leadingIcon && (this.buttonIcons.leading = html`<i class="${this.leadingIcon}"></i>`)
-        this.trailingIcon && (this.buttonIcons.trailing = html`<i class="${this.trailingIcon}"></i>`)
+        this.leadingIcon && (this.buttonIcons.leading = html`<i class="gr-button__icon ${this.leadingIcon}"></i>`)
+        this.trailingIcon && (this.buttonIcons.trailing = html`<i class="gr-button__icon ${this.trailingIcon}"></i>`)
     }
 
     private parseHTMLContent = () => {
