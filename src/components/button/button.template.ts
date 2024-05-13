@@ -9,9 +9,9 @@ export interface ButtonArgs {
     state?: string,
     leadingIcon?: string,
     trailingIcon?: string,
+    width?: string,
     href?: string
     target?: string,
-    onClick?: () => void
 }
 
 export const GrButtonTemplate = (props: ButtonArgs) => {
@@ -25,14 +25,9 @@ export const GrButtonTemplate = (props: ButtonArgs) => {
     props.state && grButton.setAttribute('state', props.state)
     props.leadingIcon && grButton.setAttribute('leading-icon', props.leadingIcon)
     props.trailingIcon && grButton.setAttribute('trailing-icon', props.trailingIcon)
+    props.width && grButton.setAttribute('width', props.width)
     props.href && grButton.setAttribute('href', props.href)
     props.target && grButton.setAttribute('target', props.target)
 
-    props.onClick && grButton.addEventListener('gr-click', handleClick)
-
     return grButton
-}
-
-export const handleClick = () => {
-    alert("Click from grow button")
 }

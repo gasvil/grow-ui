@@ -1,5 +1,5 @@
 import {StoryObj} from "@storybook/web-components";
-import {ButtonArgs, GrButtonTemplate, handleClick} from "./button.template";
+import {ButtonArgs, GrButtonTemplate} from "./button.template";
 import {html} from "lit";
 
 export default {
@@ -68,6 +68,11 @@ export default {
             name: "trailing-icon",
             type: {name: "string"},
             control: {type: "text"}
+        },
+        width: {
+            description: "Define un ancho específico del botón. Puede ser un valor en px específico o el máximo ancho disponible.",
+            type: {name: "string"},
+            control: {type: "text"},
         },
         href: {
             description: "Url a donde se desea navegar",
@@ -159,13 +164,12 @@ export let Click: StoryObj
 Click = {
     args: {
         refId: 'gr-button-click',
-        onClick: handleClick
     },
     render: (args) => html`
         ${GrButtonTemplate({content: 'Click to action', ...args})}
         <script type="text/javascript">
-            const button = document.querySelector('#gr-button-click')
-            button.addEventListener('gr-click', () => {
+            const button = document.querySelector('gr-button[ref-id="gr-button-click"]')
+            button.addEventListener('gr-click', _ => {
                 alert("Click from grow button")
             })
         </script>

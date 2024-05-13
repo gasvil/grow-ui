@@ -38,6 +38,9 @@ export class GrButton extends LitElement {
     trailingIcon?: string
 
     @property()
+    width?: number | 'full'
+
+    @property()
     href?: string
 
     @property()
@@ -54,17 +57,28 @@ export class GrButton extends LitElement {
     }
 
     createRenderRoot() {
+        this.style.display = "inline-block"
+        this.setWidth()
         return this
     }
 
     shouldUpdate(changedProperties: PropertyValues) {
         this.setLoadingButtonSize(changedProperties)
         this.setIcons()
+        this.setWidth()
         return true
     }
 
     render() {
         return this.setButtonContainer();
+    }
+
+    private setWidth = () => {
+        if (this.width == 'full') {
+            this.style.display = "block"
+        } else if (typeof this.width == 'number') {
+            this.style.display = `${this.width}px`
+        }
     }
 
     private setButtonContainer = () => {
