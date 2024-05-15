@@ -13,7 +13,7 @@ export type ButtonAnchorType = '_blank' | '_self' | '_parent' | '_top'
 @customElement('gr-button')
 export class GrButton extends LitElement {
 
-    @property({attribute: 'ref-id', reflect: true})
+    @property({attribute: 'ref-id'})
     refId?: string
 
     @property()

@@ -1,0 +1,14 @@
+@import "@commons/styles/variables.css";
+
+.gr-textfield {
+    font-family: var(--font);
+}
+
+.gr-textfield__input {
+    appearance: none;
+    outline: none;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 1rem;
+}
