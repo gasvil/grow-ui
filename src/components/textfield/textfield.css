@@ -2,6 +2,13 @@
 
 .gr-textfield {
     font-family: var(--font);
+    display: inline-flex;
+    align-items: center;
+    transition: border-color var(--transition-hover);
+    cursor: text;
+    width: 300px;
+    box-shadow: var(--shadow);
+    box-sizing: border-box;
 }
 
 .gr-textfield__input {
@@ -10,5 +17,69 @@
     border: none;
     background: transparent;
     font-family: inherit;
-    font-size: 1rem;
+    font-size: inherit;
+    width: 100%;
+}
+
+/* Sizes */
+.gr-textfield--small {
+    height: 38px;
+    padding: 0 12px;
+    font-size: 0.875rem;
+}
+
+.gr-textfield--medium {
+    height: 48px;
+    padding: 0 15px;
+}
+
+.gr-textfield--large {
+    height: 58px;
+    padding: 0 18px;
+    font-size: 1.1rem;
+}
+
+/* Types outline */
+.gr-textfield--outline {
+    border-radius: var(--corner-radius);
+    border-width: var(--border-thickness);
+    border-style: solid;
+}
+
+/* Types outline + State */
+.gr-textfield--outline.gr-textfield--enabled {
+    border-color: var(--gray-border-color);
+}
+
+.gr-textfield--outline.gr-textfield--enabled:hover {
+    border-color: var(--gray-border-color-hover);
+}
+
+.gr-textfield--outline.gr-textfield--disabled {
+    pointer-events: none;
+    border-color: var(--disabled-color-background);
+}
+
+.gr-textfield--outline.gr-textfield--focus {
+    border-color: var(--primary-color);
+}
+
+.gr-textfield--outline.gr-textfield--error {
+    border-color: var(--error-color);
+}
+
+/* Types filled */
+.gr-textfield--filled {
+    border-radius: var(--corner-radius);
+    border: var(--border-thickness) solid transparent;
+    background-color: white;
+}
+
+.gr-textfield--filled.gr-textfield--disabled {
+    filter: contrast(90%);
+    pointer-events: none;
+}
+
+.gr-textfield--filled.gr-textfield--error {
+    background-color: var(--error-color-opacity);
 }

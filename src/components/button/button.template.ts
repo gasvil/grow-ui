@@ -1,15 +1,17 @@
+import {ButtonAnchorType, ButtonPriority, ButtonSize, ButtonState, ButtonType} from "./button.ts";
+
 export interface ButtonArgs {
     refId?: string,
     content?: string
-    type?: string,
-    size?: string,
-    priority?: string,
-    state?: string,
+    type?: ButtonType,
+    size?: ButtonSize,
+    priority?: ButtonPriority,
+    state?: ButtonState,
     leadingIcon?: string,
     trailingIcon?: string,
     width?: number | 'full',
     href?: string
-    target?: string,
+    target?: ButtonAnchorType,
 }
 
 export const GrButtonTemplate = (args: ButtonArgs) => {

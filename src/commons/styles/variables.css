@@ -23,6 +23,12 @@
     --disabled-color-background: var(--gr-disabled-color-background, #e1e1e1);
     --disabled-color-text: var(--gr-disabled-color-text, #a7a7a7);
 
+    --gray-border-color: var(--gr-gray-border-color, #dbdbdb);
+    --gray-border-color-hover: var(--gr-gray-border-color-hover, #7d7d7d);
+
+    --error-color: var(--gr-error-color, #a93030);
+    --error-color-opacity: var(--gr-error-color-opacity, #f7e6e6);
+
     /*Transitions*/
     --transition-hover: var(--gr-transition-hover, 0.15s);
 
