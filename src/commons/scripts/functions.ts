@@ -1,6 +1,6 @@
 export const modifiersToBem = (
     componentName: string,
-    modifiersList: Array<String | undefined> = []
+    modifiersList: Array<String | undefined | null> = []
 ) => {
     if (modifiersList.length > 0) {
         const bemModifiers: Array<String> = []

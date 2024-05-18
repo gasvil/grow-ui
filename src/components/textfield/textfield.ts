@@ -5,8 +5,8 @@ import "./textfield.css"
 import "@components/button/button"
 
 export type TextfieldSize = 'small' | 'medium' | 'large'
-export type TextfieldType = 'outline' | 'filled' | 'underline'
-export type TextfieldState = 'enabled' | 'disabled' | 'focus' | 'error'
+export type TextfieldType = 'outline' | 'outline-filled' | 'filled' | 'underline'
+export type TextfieldState = 'enabled' | 'disabled' | 'focus'
 export type TextfieldPriority = 'primary' | 'secondary' | 'tertiary'
 export type TextfieldPlaceholderPosition = 'inside' | 'outside' | 'overline'
 
@@ -40,6 +40,9 @@ export class GrTextfield extends LitElement {
     @property({type: Boolean})
     loading?: boolean
 
+    @property()
+    error?: string
+
     render() {
         return html`
             <label
@@ -52,6 +55,11 @@ export class GrTextfield extends LitElement {
                         @focusout="${this.handleFocus}"
                 >
                 ${this.setLoadingIcon()}
+                <div class="gr-textfield__container">
+                    <span class="gr-textfield__container-leading"></span>
+                    <span class="gr-textfield__container-center"></span>
+                    <span class="gr-textfield__container-trailing"></span>
+                </div>
             </label>
         `
     }
@@ -70,7 +78,8 @@ export class GrTextfield extends LitElement {
             this.size,
             this.type,
             this.state,
-            this.priority
+            this.priority,
+            this.error != undefined ? 'error' : null
         ])
     }
 

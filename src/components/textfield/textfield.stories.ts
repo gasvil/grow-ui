@@ -32,18 +32,18 @@ export default {
         },
         type: {
             description: "Estilo del contenedor del textfield",
-            type: {name: "outline | filled | underline"},
+            type: {name: "outline | outline-filled | filled | underline"},
             control: {type: 'select'},
-            options: ['outline', 'filled', 'underline'],
+            options: ['outline', 'outline-filled', 'filled', 'underline'],
             table: {
                 defaultValue: {summary: "outline"}
             }
         },
         state: {
             description: "Estado actual del textfield.",
-            type: {name: "enabled | disabled | focus | error"},
+            type: {name: "enabled | disabled | focus"},
             control: {type: "select"},
-            options: ['enabled', 'disabled', 'focus', 'error'],
+            options: ['enabled', 'disabled', 'focus'],
             table: {
                 defaultValue: {summary: "enabled"}
             }
@@ -76,6 +76,11 @@ export default {
             table: {
                 defaultValue: {summary: true}
             }
+        },
+        error: {
+            description: "Texto que acompaña al cuadro de texto cuando ocurra algún error. Se acompaña de estilo asociado al error. Si no se ingresa un texto solo se muestra el estilo.",
+            type: {name: "string"},
+            control: {type: "text"}
         }
     }
 }

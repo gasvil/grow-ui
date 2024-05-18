@@ -16,7 +16,7 @@ export interface TextfieldArgs {
     placeholder?: string
     placeholderPosition?: TextfieldPlaceholderPosition
     loading?: boolean
-
+    error?: string
 }
 
 export const GrTextfieldTemplate = (args: TextfieldArgs) => {
@@ -31,6 +31,7 @@ export const GrTextfieldTemplate = (args: TextfieldArgs) => {
     args.placeholder && grTextfield.setAttribute('placeholder', args.placeholder)
     args.placeholderPosition && grTextfield.setAttribute('placeholder-position', args.placeholderPosition)
     args.loading && grTextfield.setAttribute('loading', '')
+    args.error && grTextfield.setAttribute('error', args.error)
 
     return grTextfield
 }

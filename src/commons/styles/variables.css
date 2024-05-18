@@ -26,8 +26,8 @@
     --gray-border-color: var(--gr-gray-border-color, #dbdbdb);
     --gray-border-color-hover: var(--gr-gray-border-color-hover, #7d7d7d);
 
-    --error-color: var(--gr-error-color, #a93030);
-    --error-color-opacity: var(--gr-error-color-opacity, #f7e6e6);
+    --error-color: var(--gr-error-color, #e12525);
+    --error-color-opacity: var(--gr-error-color-opacity, #e125254D);
 
     /*Transitions*/
     --transition-hover: var(--gr-transition-hover, 0.15s);
@@ -37,4 +37,8 @@
     --border-thickness: var(--gr-border-thickness, 2px);
     --shadow: var(--gr-shadow, var(--local-shadow));
 
+}
+
+[class^="gr-"] {
+    box-sizing: border-box;
 }
