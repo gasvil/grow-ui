@@ -1,5 +1,6 @@
 @import "@commons/styles/variables.css";
 
+// Basic style
 .gr-button {
     font-family: var(--font);
     font-size: 1rem;
@@ -21,24 +22,24 @@
     padding: 0;
     box-sizing: border-box;
     vertical-align: middle;
+
+    &:not(.gr-button--inline) {
+        box-shadow: var(--shadow);
+    }
+
+    &:active {
+        transform: translateY(1px);
+    }
+
+    &__content {
+        font-family: inherit;
+        font-size: inherit;
+        color: inherit;
+        transition: color var(--transition-hover);
+    }
 }
 
-.gr-button:not(.gr-button--inline) {
-    box-shadow: var(--shadow);
-}
-
-.gr-button__content {
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-    transition: color var(--transition-hover);
-}
-
-.gr-button:active {
-    transform: translateY(1px);
-}
-
-/* Sizes */
+// Styles
 .gr-button--small:not(.gr-button--inline) {
     height: 38px;
     padding: 0 20px;
@@ -56,119 +57,139 @@
     font-size: 1.1rem;
 }
 
-/* Types box + Priority */
+// Types box + Priority
 .gr-button--box.gr-button--primary {
     background-color: var(--primary-color);
     border: var(--border-thickness) solid var(--primary-color);
     color: white;
-}
 
-.gr-button--box.gr-button--primary:hover {
-    background-color: var(--primary-color-hover);
-    border-color: var(--primary-color-hover);
+    &:hover {
+        background-color: var(--primary-color-hover);
+        border-color: var(--primary-color-hover);
+    }
 }
 
 .gr-button--box.gr-button--secondary {
     background-color: var(--secondary-color);
     border: var(--border-thickness) solid var(--secondary-color);
     color: white;
-}
 
-.gr-button--box.gr-button--secondary:hover {
-    background-color: var(--secondary-color-hover);
-    border-color: var(--secondary-color-hover);
+    &:hover {
+        background-color: var(--secondary-color-hover);
+        border-color: var(--secondary-color-hover);
+    }
 }
 
 .gr-button--box.gr-button--tertiary {
     background-color: var(--tertiary-color);
     border: var(--border-thickness) solid var(--tertiary-color);
     color: white;
+
+    &:hover {
+        background-color: var(--tertiary-color-hover);
+        border-color: var(--tertiary-color-hover);
+    }
 }
 
-.gr-button--box.gr-button--tertiary:hover {
-    background-color: var(--tertiary-color-hover);
-    border-color: var(--tertiary-color-hover);
-}
-
-/* Types outline + Priority */
+// Types outline + Priority
 .gr-button--outline.gr-button--primary {
     border: var(--border-thickness) solid var(--primary-color);
     color: var(--primary-color);
-}
 
-.gr-button--outline.gr-button--primary:hover {
-    border-color: var(--primary-color-hover);
-    color: var(--primary-color-hover);
+    &:hover {
+        border-color: var(--primary-color-hover);
+        color: var(--primary-color-hover);
+    }
 }
 
 .gr-button--outline.gr-button--secondary {
     border: var(--border-thickness) solid var(--secondary-color);
     color: var(--secondary-color);
-}
 
-.gr-button--outline.gr-button--secondary:hover {
-    border-color: var(--secondary-color-hover);
-    color: var(--secondary-color-hover);
+    &:hover {
+        border-color: var(--secondary-color-hover);
+        color: var(--secondary-color-hover);
+    }
 }
 
 .gr-button--outline.gr-button--tertiary {
     border: var(--border-thickness) solid var(--tertiary-color);
     color: var(--tertiary-color);
+
+    &:hover {
+        border-color: var(--tertiary-color-hover);
+        color: var(--tertiary-color-hover);
+    }
 }
 
-.gr-button--outline.gr-button--tertiary:hover {
-    border-color: var(--tertiary-color-hover);
-    color: var(--tertiary-color-hover);
-}
-
-/* Types negative + Priority primary */
+// Types negative + Priority primary
 .gr-button--negative.gr-button--primary {
     background-color: white;
     border: var(--border-thickness) solid white;
     color: var(--primary-color);
-}
 
-.gr-button--negative.gr-button--primary:hover {
-    background: #f4f4f4;
-    border-color: #f4f4f4;
-    color: var(--primary-color-hover);
+    &:hover {
+        background: #f4f4f4;
+        border-color: #f4f4f4;
+        color: var(--primary-color-hover);
+    }
 }
 
 .gr-button--negative.gr-button--secondary {
     background-color: white;
     border: var(--border-thickness) solid white;
     color: var(--secondary-color);
+
+    &:hover {
+        background: #f4f4f4;
+        border-color: #f4f4f4;
+        color: var(--secondary-color-hover);
+    }
 }
 
 .gr-button--negative.gr-button--tertiary {
     background-color: white;
     border: var(--border-thickness) solid white;
     color: var(--tertiary-color);
+
+    &:hover {
+        background: #f4f4f4;
+        border-color: #f4f4f4;
+        color: var(--tertiary-color-hover);
+    }
 }
 
-/* Types inline + Priority primary */
+// Types inline + Priority primary
 .gr-button--inline.gr-button--primary {
     color: var(--primary-color);
+
+    &:hover {
+        color: var(--primary-color-hover);
+    }
 }
 
 .gr-button--inline.gr-button--secondary {
     color: var(--secondary-color);
+
+    &:hover {
+        color: var(--secondary-color-hover);
+    }
 }
 
 .gr-button--inline.gr-button--tertiary {
     color: var(--tertiary-color);
+
+    &:hover {
+        color: var(--tertiary-color-hover);
+    }
 }
 
-/* State disabled + State loading */
+// State disabled + State loading
 .gr-button--disabled, .gr-button--loading {
     pointer-events: none;
 }
 
-.gr-button--disabled {
-    filter: grayscale(100%);
-}
-
-/* States disabled + Type */
+// States disabled + Type
 .gr-button--disabled.gr-button--box,
 .gr-button--disabled.gr-button--negative {
     background-color: var(--disabled-button-background);

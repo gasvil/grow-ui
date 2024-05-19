@@ -2,7 +2,7 @@ import {html, LitElement, PropertyValues, TemplateResult} from "lit";
 import {customElement, property} from "lit/decorators.js";
 import {modifiersToBem} from "../../commons/scripts/functions";
 import "@components/loader/loader"
-import './button.css'
+import './button.scss'
 
 export type ButtonType = 'box' | 'outline' | 'negative' | 'inline'
 export type ButtonSize = 'small' | 'medium' | 'large'

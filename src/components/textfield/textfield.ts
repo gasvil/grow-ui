@@ -51,14 +51,16 @@ export class GrTextfield extends LitElement {
                     <input
                             type="text"
                             class="gr-textfield__input"
+                            placeholder="${!this.placeholderPosition ? this.placeholder : ''}"
                             @focusin="${this.handleFocus}"
                             @focusout="${this.handleFocus}"
                     >
+                    ${this.setCustomPlaceholder()}
                     ${this.setLoadingIcon()}
                     <div class="gr-textfield__borders">
-                        <span class="gr-textfield__borders--leading"></span>
-                        <span class="gr-textfield__borders--center"></span>
-                        <span class="gr-textfield__borders--trailing"></span>
+                        <span class="gr-textfield__border gr-textfield__border--leading"></span>
+                        <span class="gr-textfield__border gr-textfield__border--center"></span>
+                        <span class="gr-textfield__border gr-textfield__border--trailing"></span>
                     </div>
                 </label>
             </div>
@@ -73,6 +75,18 @@ export class GrTextfield extends LitElement {
     protected createRenderRoot(): HTMLElement | DocumentFragment {
         this.style.display = 'inline-block'
         return this
+    }
+
+    private setCustomPlaceholder = () => {
+        if (this.placeholderPosition) {
+            return html`<span class="gr-textfield__placeholder">${this.placeholder}</span>`
+        } else {
+            return null
+        }
+    }
+
+    private handlePlaceholder = (action: 'in' | 'out') => {
+        console.log('handle placeholder', action)
     }
 
     private setLabel = () => {
@@ -103,8 +117,10 @@ export class GrTextfield extends LitElement {
         const target = e?.target as HTMLInputElement
         if (document.activeElement == target) {
             this.setAttribute('state', 'focus')
+            this.handlePlaceholder('in')
         } else if (this.state == 'focus') {
             this.setAttribute('state', 'enabled')
+            this.handlePlaceholder('out')
         }
     }
 

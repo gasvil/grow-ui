@@ -1,7 +1,7 @@
 import {html, LitElement} from "lit";
 import {customElement, property} from "lit/decorators.js";
 import {modifiersToBem} from "../../commons/scripts/functions";
-import "./loader.css"
+import "./loader.scss"
 
 export type LoaderPriority = 'primary' | 'secondary' | 'tertiary'
 

@@ -86,4 +86,10 @@ export default {
 }
 
 export let Default: StoryObj
-Default = {}
+Default = {
+    args: {
+        label: "Default label",
+        placeholder: "Custom placeholder",
+        placeholderPosition: "inside"
+    }
+}

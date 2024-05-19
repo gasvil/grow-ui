@@ -21,6 +21,7 @@
     --tertiary-color-hover: var(--gr-tertiary-color-hover, #8f5219);
 
     --gray-text-color: var(--gr-gray-text-color, #707070);
+    --gray-placeholder-color: var(--gr-gray-placeholder-color, #c9c9c9);
 
     --disabled-button-background: var(--gr-disabled-button-background, #e1e1e1);
     --disabled-button-text: var(--gr-disabled-button-text, #a7a7a7);
