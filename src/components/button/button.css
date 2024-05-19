@@ -171,17 +171,16 @@
 /* States disabled + Type */
 .gr-button--disabled.gr-button--box,
 .gr-button--disabled.gr-button--negative {
-    background-color: var(--disabled-color-background);
-    border-color: var(--disabled-color-background);
-    color: var(--disabled-color-text);
+    background-color: var(--disabled-button-background);
+    border-color: var(--disabled-button-background);
+    color: var(--disabled-button-text);
 }
 
 .gr-button--disabled.gr-button--outline {
-    border-color: var(--disabled-color-background);
-    border-color: var(--disabled-color-background);
-    color: var(--disabled-color-text);
+    border-color: var(--disabled-button-background);
+    color: var(--disabled-button-text);
 }
 
 .gr-button--disabled.gr-button--inline {
-    color: var(--disabled-color-text);
+    color: var(--disabled-button-text);
 }

@@ -1,0 +1,330 @@
+@import "@commons/styles/variables.css";
+
+.gr-textfield {
+    font-family: var(--font);
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.gr-textfield__container {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    cursor: text;
+    position: relative;
+    border-radius: var(--corner-radius);
+    transition: background-color var(--transition-hover);
+}
+
+.gr-textfield__input {
+    appearance: none;
+    outline: none;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    width: 100%;
+    z-index: 1;
+    padding: 0;
+}
+
+.gr-textfield__loader {
+    position: absolute;
+    top: calc(50% - 7.5px);
+    z-index: 1;
+}
+
+// Borders
+.gr-textfield__borders {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    & > * {
+        border-style: solid;
+        height: 100%;
+        transition: border-color var(--transition-hover);
+    }
+
+    .gr-textfield__borders--leading {
+        border-top-left-radius: var(--corner-radius);
+        border-bottom-left-radius: var(--corner-radius);
+        border-width: var(--border-thickness) 0 var(--border-thickness) var(--border-thickness);
+    }
+
+    .gr-textfield__borders--center {
+        border-width: var(--border-thickness) 0 var(--border-thickness) 0;
+        width: 100%;
+    }
+
+    .gr-textfield__borders--trailing {
+        border-top-right-radius: var(--corner-radius);
+        border-bottom-right-radius: var(--corner-radius);
+        border-width: var(--border-thickness) var(--border-thickness) var(--border-thickness) 0;
+        width: 100%;
+    }
+}
+
+// Sizes
+.gr-textfield--small {
+    .gr-textfield__container {
+        height: 38px;
+        padding: 0 12px;
+        font-size: 0.875rem;
+    }
+
+    .gr-textfield__borders--leading {
+        min-width: 12px;
+    }
+
+    .gr-textfield__loader {
+        right: 12px;
+    }
+}
+
+.gr-textfield--medium {
+    .gr-textfield__container {
+        height: 48px;
+        padding: 0 15px;
+    }
+
+    .gr-textfield__borders--leading {
+        min-width: 15px;
+    }
+
+    .gr-textfield__loader {
+        right: 15px;
+    }
+}
+
+.gr-textfield--large {
+    .gr-textfield__container {
+        height: 58px;
+        padding: 0 18px;
+        font-size: 1.1rem;
+    }
+
+    .gr-textfield__borders--leading {
+        min-width: 18px;
+    }
+
+    .gr-textfield__loader {
+        right: 18px;
+    }
+}
+
+// Type outline
+.gr-textfield--outline {
+    &.gr-textfield--enabled {
+        .gr-textfield__borders > * {
+            border-color: var(--gray-border-color);
+        }
+
+        &:hover .gr-textfield__borders > * {
+            border-color: var(--gray-border-color-hover);
+        }
+    }
+
+    &.gr-textfield--disabled {
+        pointer-events: none;
+
+        .gr-textfield__borders > * {
+            border-color: var(--disabled-input-border-color);
+        }
+    }
+
+    &.gr-textfield--focus {
+        &.gr-textfield--primary .gr-textfield__borders > * {
+            border-color: var(--primary-color);
+        }
+
+        &.gr-textfield--secondary .gr-textfield__borders > * {
+            border-color: var(--secondary-color);
+        }
+
+        &.gr-textfield--tertiary .gr-textfield__borders > * {
+            border-color: var(--tertiary-color);
+        }
+    }
+}
+
+// Types outline filled
+.gr-textfield--outline-filled {
+    .gr-textfield__container {
+        background-color: white;
+    }
+
+    &.gr-textfield--enabled {
+        .gr-textfield__borders > * {
+            border-color: var(--gray-border-color);
+        }
+
+        &:hover .gr-textfield__borders > * {
+            border-color: var(--gray-border-color-hover);
+        }
+    }
+
+    &.gr-textfield--disabled {
+        pointer-events: none;
+
+        .gr-textfield__container {
+            background-color: var(--disabled-input-background-color);
+        }
+
+        .gr-textfield__borders > * {
+            border-color: var(--disabled-input-border-color);
+        }
+    }
+
+    &.gr-textfield--focus {
+        &.gr-textfield--primary .gr-textfield__borders > * {
+            border-color: var(--primary-color);
+        }
+
+        &.gr-textfield--secondary .gr-textfield__borders > * {
+            border-color: var(--secondary-color);
+        }
+
+        &.gr-textfield--tertiary .gr-textfield__borders > * {
+            border-color: var(--tertiary-color);
+        }
+    }
+}
+
+// Types filled
+.gr-textfield--filled {
+    .gr-textfield__borders > * {
+        border-color: transparent;
+    }
+
+    &.gr-textfield--enabled {
+        .gr-textfield__container {
+            background-color: white;
+        }
+    }
+
+    &.gr-textfield--disabled {
+        pointer-events: none;
+
+        .gr-textfield__container {
+            background-color: var(--disabled-input-background-color);
+        }
+    }
+
+    &.gr-textfield--focus {
+        .gr-textfield__container {
+            background-color: white;
+        }
+    }
+}
+
+// Types underline
+.gr-textfield--underline {
+    .gr-textfield__borders > * {
+        border-radius: 0;
+        border-left-width: 0;
+        border-right-width: 0;
+        border-top-width: 0;
+    }
+
+    &.gr-textfield--enabled {
+        .gr-textfield__borders > * {
+            border-color: transparent;
+            border-bottom-color: var(--gray-border-color);
+        }
+
+        &:hover .gr-textfield__borders > * {
+            border-color: var(--gray-border-color-hover);
+        }
+    }
+
+    &.gr-textfield--disabled {
+        pointer-events: none;
+
+        .gr-textfield__borders > * {
+            border-color: var(--disabled-input-border-color);
+        }
+    }
+
+    &.gr-textfield--focus {
+        &.gr-textfield--primary .gr-textfield__borders > * {
+            border-color: var(--primary-color);
+        }
+
+        &.gr-textfield--secondary .gr-textfield__borders > * {
+            border-color: var(--secondary-color);
+        }
+
+        &.gr-textfield--tertiary .gr-textfield__borders > * {
+            border-color: var(--tertiary-color);
+        }
+    }
+}
+
+// Types underline filled
+.gr-textfield--underline-filled {
+    .gr-textfield__borders > * {
+        border-radius: 0;
+        border-left-width: 0;
+        border-right-width: 0;
+        border-top-width: 0;
+    }
+
+    .gr-textfield__container {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    &.gr-textfield--enabled {
+        .gr-textfield__container {
+            background-color: white;
+        }
+    }
+
+    &.gr-textfield--enabled {
+        .gr-textfield__borders > * {
+            border-color: var(--gray-border-color);
+        }
+
+        &:hover .gr-textfield__borders > * {
+            border-color: var(--gray-border-color-hover);
+        }
+    }
+
+    &.gr-textfield--disabled {
+        pointer-events: none;
+
+        .gr-textfield__container {
+            background-color: var(--disabled-input-background-color);
+        }
+
+        .gr-textfield__borders > * {
+            border-color: var(--disabled-input-border-color);
+        }
+    }
+
+    &.gr-textfield--focus {
+        .gr-textfield__container {
+            background-color: white;
+        }
+
+        &.gr-textfield--primary .gr-textfield__borders > * {
+            border-color: var(--primary-color);
+        }
+
+        &.gr-textfield--secondary .gr-textfield__borders > * {
+            border-color: var(--secondary-color);
+        }
+
+        &.gr-textfield--tertiary .gr-textfield__borders > * {
+            border-color: var(--tertiary-color);
+        }
+    }
+}

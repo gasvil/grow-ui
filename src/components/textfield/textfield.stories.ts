@@ -32,9 +32,9 @@ export default {
         },
         type: {
             description: "Estilo del contenedor del textfield",
-            type: {name: "outline | outline-filled | filled | underline"},
+            type: {name: "outline | outline-filled | filled | underline | underline-filled"},
             control: {type: 'select'},
-            options: ['outline', 'outline-filled', 'filled', 'underline'],
+            options: ['outline', 'outline-filled', 'filled', 'underline', 'underline-filled'],
             table: {
                 defaultValue: {summary: "outline"}
             }

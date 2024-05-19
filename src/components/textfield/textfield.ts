@@ -1,11 +1,11 @@
 import {html, LitElement, PropertyValues} from "lit";
 import {customElement, property} from "lit/decorators.js";
 import {modifiersToBem} from "../../commons/scripts/functions.ts";
-import "./textfield.css"
+import "./textfield.scss"
 import "@components/button/button"
 
 export type TextfieldSize = 'small' | 'medium' | 'large'
-export type TextfieldType = 'outline' | 'outline-filled' | 'filled' | 'underline'
+export type TextfieldType = 'outline' | 'outline-filled' | 'filled' | 'underline' | 'underline-filled'
 export type TextfieldState = 'enabled' | 'disabled' | 'focus'
 export type TextfieldPriority = 'primary' | 'secondary' | 'tertiary'
 export type TextfieldPlaceholderPosition = 'inside' | 'outside' | 'overline'
@@ -45,22 +45,23 @@ export class GrTextfield extends LitElement {
 
     render() {
         return html`
-            <label
-                    class="${this.modifierStyle()}"
-            >
-                <input
-                        type="text"
-                        class="gr-textfield__input"
-                        @focusin="${this.handleFocus}"
-                        @focusout="${this.handleFocus}"
-                >
-                ${this.setLoadingIcon()}
-                <div class="gr-textfield__container">
-                    <span class="gr-textfield__container-leading"></span>
-                    <span class="gr-textfield__container-center"></span>
-                    <span class="gr-textfield__container-trailing"></span>
-                </div>
-            </label>
+            <div class="${this.modifierStyle()}">
+                ${this.setLabel()}
+                <label class="gr-textfield__container">
+                    <input
+                            type="text"
+                            class="gr-textfield__input"
+                            @focusin="${this.handleFocus}"
+                            @focusout="${this.handleFocus}"
+                    >
+                    ${this.setLoadingIcon()}
+                    <div class="gr-textfield__borders">
+                        <span class="gr-textfield__borders--leading"></span>
+                        <span class="gr-textfield__borders--center"></span>
+                        <span class="gr-textfield__borders--trailing"></span>
+                    </div>
+                </label>
+            </div>
         `
     }
 
@@ -70,7 +71,16 @@ export class GrTextfield extends LitElement {
     }
 
     protected createRenderRoot(): HTMLElement | DocumentFragment {
+        this.style.display = 'inline-block'
         return this
+    }
+
+    private setLabel = () => {
+        if (this.label) {
+            return html`<span class="gr-textfield__label">${this.label}</span>`
+        } else {
+            return html``
+        }
     }
 
     private modifierStyle = () => {
@@ -101,7 +111,12 @@ export class GrTextfield extends LitElement {
     private setLoadingIcon = () => {
         if (this.loading) {
             return html`
-                <gr-loader size="10" thickness="2"></gr-loader>`
+                <gr-loader
+                        class="gr-textfield__loader"
+                        size="15"
+                        thickness="2"
+                        priority="${this.priority}"
+                ></gr-loader>`
         } else {
             return html``
         }
