@@ -17,11 +17,14 @@ export interface TextfieldArgs {
     placeholder?: string
     placeholderPosition?: TextfieldPlaceholderPosition
     loading?: boolean
+    leadingIcon?: string
+    trailingIcon?: string
     error?: string
 }
 
 export const GrTextfieldTemplate = (args: TextfieldArgs) => {
     const grTextfield = document.createElement('gr-textfield')
+    console.log(args.error)
 
     args.refId && grTextfield.setAttribute('ref-id', args.refId)
     args.label && grTextfield.setAttribute('label', args.label)
@@ -33,7 +36,9 @@ export const GrTextfieldTemplate = (args: TextfieldArgs) => {
     args.placeholder && grTextfield.setAttribute('placeholder', args.placeholder)
     args.placeholderPosition && grTextfield.setAttribute('placeholder-position', args.placeholderPosition)
     args.loading && grTextfield.setAttribute('loading', '')
-    args.error && grTextfield.setAttribute('error', args.error)
+    args.leadingIcon && grTextfield.setAttribute('leading-icon', args.leadingIcon)
+    args.trailingIcon && grTextfield.setAttribute('trailing-icon', args.trailingIcon)
+    if (args.error != null) grTextfield.setAttribute('error', args.error ?? "")
 
     return grTextfield
 }

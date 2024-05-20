@@ -79,8 +79,20 @@ export default {
             type: {name: "boolean"},
             control: {type: "boolean"},
             table: {
-                defaultValue: {summary: true}
+                defaultValue: {summary: false}
             }
+        },
+        leadingIcon: {
+            description: "Ícono que se mostrará al lado izquierdo del textfield. Si está usando una tipografía de fuentes, solo debe agregar la clase del ícono que desea mostrar.",
+            name: "leading-icon",
+            type: {name: "string"},
+            control: {type: "text"},
+        },
+        trailingIcon: {
+            description: "Ícono que se mostrará al lado derecho del textfield. Si está usando una tipografía de fuentes, solo debe agregar la clase del ícono que desea mostrar.",
+            name: "trailing-icon",
+            type: {name: "string"},
+            control: {type: "text"},
         },
         error: {
             description: "Texto que acompaña al cuadro de texto cuando ocurra algún error. Se acompaña de estilo asociado al error. Si no se ingresa un texto solo se muestra el estilo.",
@@ -93,9 +105,9 @@ export default {
 export let Default: StoryObj
 Default = {
     args: {
-        label: "Default label",
-        value: "Test value",
-        placeholder: "Placeholder",
-        placeholderPosition: "overline"
+        trailingIcon: "fa-solid fa-heart",
+        leadingIcon: "fa-solid fa-fire",
+        placeholder: "Test value",
+        placeholderPosition: 'inside'
     }
 }

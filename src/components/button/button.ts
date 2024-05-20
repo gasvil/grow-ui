@@ -56,19 +56,7 @@ export class GrButton extends LitElement {
         this.setIcons()
     }
 
-    createRenderRoot() {
-        this.style.display = "inline-block"
-        this.setWidth()
-        return this
-    }
-
-    shouldUpdate(changedProperties: PropertyValues) {
-        this.setLoadingButtonSize(changedProperties)
-        this.setIcons()
-        return true
-    }
-
-    render() {
+    protected render(): TemplateResult {
         if (this.href) {
             return html`
                 <a
@@ -92,6 +80,18 @@ export class GrButton extends LitElement {
                 </button>
             `
         }
+    }
+
+    protected createRenderRoot(): HTMLElement | DocumentFragment {
+        this.style.display = "inline-block"
+        this.setWidth()
+        return this
+    }
+
+    protected shouldUpdate(_changedProperties: PropertyValues): boolean {
+        this.setLoadingButtonSize(_changedProperties)
+        this.setIcons()
+        return super.shouldUpdate(_changedProperties);
     }
 
     private setWidth = () => {

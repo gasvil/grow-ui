@@ -1,4 +1,4 @@
-import {html, LitElement} from "lit";
+import {html, LitElement, TemplateResult} from "lit";
 import {customElement, property} from "lit/decorators.js";
 import {modifiersToBem} from "../../commons/scripts/functions";
 import "./loader.scss"
@@ -20,17 +20,17 @@ export class GrLoader extends LitElement {
     @property({type: Boolean})
     negative: boolean | undefined = false
 
-    createRenderRoot() {
-        this.style.display = 'inline-block'
-        return this
-    }
-
-    render() {
+    protected render(): TemplateResult {
         return html`
             <div class="${this.modifierStyle()}">
                 <div class="gr-loader__indicator" style="${this.customStyle()}"></div>
             </div>
         `
+    }
+
+    protected createRenderRoot(): HTMLElement | DocumentFragment {
+        this.style.display = 'inline-block'
+        return this
     }
 
     private customStyle = (): string => {

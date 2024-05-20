@@ -56,6 +56,19 @@
         top: calc(50% - 7.5px);
         z-index: 1;
     }
+
+    &__icon {
+        color: var(--gray-placeholder-color);
+        transition: var(--transition-hover);
+
+        &--leading {
+            margin-right: 10px;
+        }
+
+        &--trailing {
+            margin-left: 10px;
+        }
+    }
 }
 
 // Sizes
@@ -314,6 +327,10 @@
 // Placeholder positions - Inside
 .gr-textfield--placeholder-inside.gr-textfield--focus,
 .gr-textfield--placeholder-inside.gr-textfield--content-filled {
+    .gr-textfield__placeholder {
+        color: var(--gray-text-color);
+    }
+
     &.gr-textfield--small {
         .gr-textfield__placeholder {
             top: 4px;
@@ -356,21 +373,21 @@
     }
 
     &.gr-textfield--small .gr-textfield__placeholder {
-        top: -20px;
+        top: -21px;
         left: 0;
         font-size: 0.75rem;
         color: var(--gray-text-color);
     }
 
     &.gr-textfield--medium .gr-textfield__placeholder {
-        top: -23px;
+        top: -26px;
         left: 0;
         font-size: 0.85rem;
         color: var(--gray-text-color);
     }
 
     &.gr-textfield--large .gr-textfield__placeholder {
-        top: -27px;
+        top: -29px;
         left: 0;
         font-size: 0.95rem;
         color: var(--gray-text-color);
@@ -405,5 +422,64 @@
         top: -12px;
         font-size: 0.95rem;
         left: 13px;
+    }
+}
+
+// Icons
+.gr-textfield:not(.gr-textfield--focus) .gr-textfield__container:hover .gr-textfield__icon {
+    color: var(--gray-border-color-hover);
+}
+
+.gr-textfield--focus {
+    &.gr-textfield--primary .gr-textfield__icon {
+        color: var(--primary-color);
+    }
+
+    &.gr-textfield--secondary .gr-textfield__icon {
+        color: var(--secondary-color);
+    }
+
+    &.gr-textfield--tertiary .gr-textfield__icon {
+        color: var(--tertiary-color);
+    }
+}
+
+.gr-textfield--leading {
+    .gr-textfield__placeholder {
+        left: 40px;
+    }
+}
+
+// Error
+.gr-textfield--error {
+    &.gr-textfield--outline .gr-textfield__container,
+    &.gr-textfield--outline-filled .gr-textfield__container,
+    &.gr-textfield--underline .gr-textfield__container,
+    &.gr-textfield--underline-filled .gr-textfield__container {
+        border-color: var(--error-color) !important;
+
+        &:hover {
+            border-color: var(--error-color);
+        }
+    }
+
+    .gr-textfield__error-msg {
+        position: absolute;
+        top: calc(100% + 6px);
+        color: var(--error-color);
+        font-size: 0.6rem;
+        left: 0;
+    }
+
+    &.gr-textfield--small .gr-textfield__error-msg {
+        font-size: 0.65rem;
+    }
+
+    &.gr-textfield--medium .gr-textfield__error-msg {
+        font-size: 0.75rem;
+    }
+
+    &.gr-textfield--large .gr-textfield__error-msg {
+        font-size: 0.85rem;
     }
 }

@@ -1,4 +1,4 @@
-import {html, LitElement, PropertyValues} from "lit";
+import {html, LitElement, PropertyValues, TemplateResult} from "lit";
 import {customElement, property} from "lit/decorators.js";
 import {findParentBackground, modifiersToBem} from "../../commons/scripts/functions.ts";
 import "./textfield.scss"
@@ -46,11 +46,24 @@ export class GrTextfield extends LitElement {
     @property()
     error?: string
 
-    render() {
+    @property({attribute: 'leading-icon'})
+    leadingIcon?: string
+
+    @property({attribute: 'trailing-icon'})
+    trailingIcon?: string
+
+    private textfieldIcons: {
+        leading?: TemplateResult,
+        trailing?: TemplateResult,
+        loading?: TemplateResult,
+    } = {}
+
+    protected render(): TemplateResult {
         return html`
             <div class="${this.modifierStyle()}">
                 ${this.setLabel()}
                 <label class="gr-textfield__container">
+                    ${this.textfieldIcons.leading}
                     <input
                             class="gr-textfield__input"
                             type="text"
@@ -60,8 +73,10 @@ export class GrTextfield extends LitElement {
                             @focusout="${this.handleFocus}"
                             @input="${this.handleValue}"
                     >
+                    ${this.textfieldIcons.trailing}
+                    ${this.textfieldIcons.loading}
                     ${this.setCustomPlaceholder()}
-                    ${this.setLoadingIcon()}
+                    ${this.setErrorMessage()}
                 </label>
             </div>
         `
@@ -70,7 +85,11 @@ export class GrTextfield extends LitElement {
     protected updated(_: PropertyValues) {
         this.handleFocus(undefined)
         setTimeout(this.handlePlaceholderIn, 500)
-        this.setLoadingIcon()
+    }
+
+    protected shouldUpdate(_changedProperties: PropertyValues): boolean {
+        this.setIcons()
+        return super.shouldUpdate(_changedProperties);
     }
 
     protected createRenderRoot(): HTMLElement | DocumentFragment {
@@ -78,9 +97,26 @@ export class GrTextfield extends LitElement {
         return this
     }
 
+    private setIcons = () => {
+        this.leadingIcon && (this.textfieldIcons.leading = html`<i
+                class="gr-textfield__icon gr-textfield__icon--leading ${this.leadingIcon}"></i>`)
+        this.trailingIcon && (this.textfieldIcons.trailing = html`<i
+                class="gr-textfield__icon gr-textfield__icon--trailing ${this.trailingIcon}"></i>`)
+        this.loading && (this.textfieldIcons.loading = html`
+            <gr-loader class="gr-textfield__loader" size="15" thickness="2" priority="${this.priority}"></gr-loader>`)
+    }
+
     private setCustomPlaceholder = () => {
         if (this.placeholderPosition) {
             return html`<span class="gr-textfield__placeholder">${this.placeholder}</span>`
+        } else {
+            return null
+        }
+    }
+
+    private setErrorMessage = () => {
+        if (this.error && this.error.length > 0) {
+            return html`<span class="gr-textfield__error-msg">${this.error}</span>`
         } else {
             return null
         }
@@ -94,10 +130,6 @@ export class GrTextfield extends LitElement {
                 placeholder.style.backgroundColor = backgroundColor ?? 'white'
             }
         }
-    }
-
-    private handlePlaceholderOut = () => {
-
     }
 
     private setLabel = () => {
@@ -114,8 +146,9 @@ export class GrTextfield extends LitElement {
             this.type,
             this.state,
             this.priority,
-            'placeholder-' + this.placeholderPosition,
-            this.error != undefined ? 'error' : null,
+            this.placeholderPosition && this.placeholder ? 'placeholder-' + this.placeholderPosition : null,
+            this.leadingIcon ? 'leading' : null,
+            this.error != null ? 'error' : null,
             this.value.length > 0 ? 'content-filled' : null
         ])
     }
@@ -133,27 +166,12 @@ export class GrTextfield extends LitElement {
             this.handlePlaceholderIn()
         } else if (this.state == 'focus') {
             this.setAttribute('state', 'enabled')
-            this.handlePlaceholderOut()
         }
     }
 
     private handleValue = (e: Event) => {
         const t = e.target as HTMLInputElement
         this.value = t.value
-    }
-
-    private setLoadingIcon = () => {
-        if (this.loading) {
-            return html`
-                <gr-loader
-                        class="gr-textfield__loader"
-                        size="15"
-                        thickness="2"
-                        priority="${this.priority}"
-                ></gr-loader>`
-        } else {
-            return html``
-        }
     }
 
 }
