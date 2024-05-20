@@ -21,6 +21,11 @@ export default {
             type: {name: "string"},
             control: {type: "text"},
         },
+        value: {
+            description: "Texto del contenido del botón.",
+            type: {name: "string"},
+            control: {type: "text"},
+        },
         size: {
             description: "Tamaño del textfield",
             type: {name: "small | medium, large"},
@@ -89,7 +94,8 @@ export let Default: StoryObj
 Default = {
     args: {
         label: "Default label",
-        placeholder: "Custom placeholder",
-        placeholderPosition: "inside"
+        value: "Test value",
+        placeholder: "Placeholder",
+        placeholderPosition: "overline"
     }
 }

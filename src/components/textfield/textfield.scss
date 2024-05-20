@@ -15,11 +15,15 @@
         cursor: text;
         position: relative;
         border-radius: var(--corner-radius);
-        transition: background-color var(--transition-hover);
+        transition: background-color var(--transition-hover), border-color var(--transition-hover);
+        border-width: var(--border-thickness);
+        border-style: solid;
     }
 
     &__label {
         color: var(--gray-text-color);
+        opacity: 1;
+        transition: var(--transition-hover);
     }
 
     &__input {
@@ -32,6 +36,7 @@
         width: 100%;
         z-index: 1;
         padding: 0;
+        transition: var(--transition-position);
 
         &::placeholder {
             color: var(--gray-placeholder-color);
@@ -43,48 +48,13 @@
         font-size: inherit;
         font-family: inherit;
         color: var(--gray-placeholder-color);
+        transition: var(--transition-hover);
     }
 
     &__loader {
         position: absolute;
         top: calc(50% - 7.5px);
         z-index: 1;
-    }
-}
-
-// Borders
-.gr-textfield__borders {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.gr-textfield__border {
-    border-style: solid;
-    height: 100%;
-    transition: border-color var(--transition-hover);
-
-    &--leading {
-        border-top-left-radius: var(--corner-radius);
-        border-bottom-left-radius: var(--corner-radius);
-        border-width: var(--border-thickness) 0 var(--border-thickness) var(--border-thickness);
-    }
-
-    &--center {
-        border-width: var(--border-thickness) 0 var(--border-thickness) 0;
-        width: 100%;
-    }
-
-    &--trailing {
-        border-top-right-radius: var(--corner-radius);
-        border-bottom-right-radius: var(--corner-radius);
-        border-width: var(--border-thickness) var(--border-thickness) var(--border-thickness) 0;
-        width: 100%;
     }
 }
 
@@ -97,12 +67,13 @@
     }
 
     .gr-textfield__label {
-        font-size: 0.7rem;
-        margin-bottom: 3px;
+        font-size: 0.75rem;
+        margin-bottom: 5px;
     }
 
-    .gr-textfield__border--leading {
-        min-width: 12px;
+    .gr-textfield__placeholder {
+        top: calc(50% - 9px);
+        left: 12px;
     }
 
     .gr-textfield__loader {
@@ -117,12 +88,13 @@
     }
 
     .gr-textfield__label {
-        font-size: 0.8rem;
-        margin-bottom: 5px;
+        font-size: 0.85rem;
+        margin-bottom: 7px;
     }
 
-    .gr-textfield__border--leading {
-        min-width: 15px;
+    .gr-textfield__placeholder {
+        top: calc(50% - 10px);
+        left: 15px;
     }
 
     .gr-textfield__loader {
@@ -138,12 +110,13 @@
     }
 
     .gr-textfield__label {
-        font-size: 0.9rem;
-        margin-bottom: 7px;
+        font-size: 0.95rem;
+        margin-bottom: 9px;
     }
 
-    .gr-textfield__border--leading {
-        min-width: 18px;
+    .gr-textfield__placeholder {
+        top: calc(50% - 11px);
+        left: 18px;
     }
 
     .gr-textfield__loader {
@@ -151,14 +124,12 @@
     }
 }
 
-// Type outline
+// Types - outline
 .gr-textfield--outline {
-    &.gr-textfield--enabled {
-        .gr-textfield__border {
-            border-color: var(--gray-border-color);
-        }
+    &.gr-textfield--enabled .gr-textfield__container {
+        border-color: var(--gray-border-color);
 
-        &:hover .gr-textfield__border {
+        &:hover {
             border-color: var(--gray-border-color-hover);
         }
     }
@@ -166,38 +137,36 @@
     &.gr-textfield--disabled {
         pointer-events: none;
 
-        .gr-textfield__border {
+        .gr-textfield__container {
             border-color: var(--disabled-input-border-color);
         }
     }
 
     &.gr-textfield--focus {
-        &.gr-textfield--primary .gr-textfield__border {
+        &.gr-textfield--primary .gr-textfield__container {
             border-color: var(--primary-color);
         }
 
-        &.gr-textfield--secondary .gr-textfield__border {
+        &.gr-textfield--secondary .gr-textfield__container {
             border-color: var(--secondary-color);
         }
 
-        &.gr-textfield--tertiary .gr-textfield__border {
+        &.gr-textfield--tertiary .gr-textfield__container {
             border-color: var(--tertiary-color);
         }
     }
 }
 
-// Types outline filled
+// Types - outline filled
 .gr-textfield--outline-filled {
     .gr-textfield__container {
         background-color: white;
     }
 
-    &.gr-textfield--enabled {
-        .gr-textfield__border {
-            border-color: var(--gray-border-color);
-        }
+    &.gr-textfield--enabled .gr-textfield__container {
+        border-color: var(--gray-border-color);
 
-        &:hover .gr-textfield__border {
+        &:hover {
             border-color: var(--gray-border-color-hover);
         }
     }
@@ -207,38 +176,33 @@
 
         .gr-textfield__container {
             background-color: var(--disabled-input-background-color);
-        }
-
-        .gr-textfield__border {
             border-color: var(--disabled-input-border-color);
         }
     }
 
     &.gr-textfield--focus {
-        &.gr-textfield--primary .gr-textfield__border {
+        &.gr-textfield--primary .gr-textfield__container {
             border-color: var(--primary-color);
         }
 
-        &.gr-textfield--secondary .gr-textfield__border {
+        &.gr-textfield--secondary .gr-textfield__container {
             border-color: var(--secondary-color);
         }
 
-        &.gr-textfield--tertiary .gr-textfield__border {
+        &.gr-textfield--tertiary .gr-textfield__container {
             border-color: var(--tertiary-color);
         }
     }
 }
 
-// Types filled
+// Types - filled
 .gr-textfield--filled {
-    .gr-textfield__border {
+    .gr-textfield__container {
         border-color: transparent;
     }
 
-    &.gr-textfield--enabled {
-        .gr-textfield__container {
-            background-color: white;
-        }
+    &.gr-textfield--enabled .gr-textfield__container {
+        background-color: white;
     }
 
     &.gr-textfield--disabled {
@@ -256,22 +220,20 @@
     }
 }
 
-// Types underline
+// Types - underline
 .gr-textfield--underline {
-    .gr-textfield__border {
+    .gr-textfield__container {
         border-radius: 0;
         border-left-width: 0;
         border-right-width: 0;
         border-top-width: 0;
     }
 
-    &.gr-textfield--enabled {
-        .gr-textfield__border {
-            border-color: transparent;
-            border-bottom-color: var(--gray-border-color);
-        }
+    &.gr-textfield--enabled .gr-textfield__container {
+        border-color: transparent;
+        border-bottom-color: var(--gray-border-color);
 
-        &:hover .gr-textfield__border {
+        &:hover {
             border-color: var(--gray-border-color-hover);
         }
     }
@@ -279,52 +241,44 @@
     &.gr-textfield--disabled {
         pointer-events: none;
 
-        .gr-textfield__border {
+        .gr-textfield__container {
             border-color: var(--disabled-input-border-color);
         }
     }
 
     &.gr-textfield--focus {
-        &.gr-textfield--primary .gr-textfield__border {
+        &.gr-textfield--primary .gr-textfield__container {
             border-color: var(--primary-color);
         }
 
-        &.gr-textfield--secondary .gr-textfield__border {
+        &.gr-textfield--secondary .gr-textfield__container {
             border-color: var(--secondary-color);
         }
 
-        &.gr-textfield--tertiary .gr-textfield__border {
+        &.gr-textfield--tertiary .gr-textfield__container {
             border-color: var(--tertiary-color);
         }
     }
 }
 
-// Types underline filled
+// Types - underline filled
 .gr-textfield--underline-filled {
     .gr-textfield__border {
-        border-radius: 0;
         border-left-width: 0;
         border-right-width: 0;
         border-top-width: 0;
-    }
-
-    .gr-textfield__container {
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
     }
 
-    &.gr-textfield--enabled {
-        .gr-textfield__container {
-            background-color: white;
-        }
+    &.gr-textfield--enabled .gr-textfield__container {
+        background-color: white;
     }
 
-    &.gr-textfield--enabled {
-        .gr-textfield__border {
-            border-color: var(--gray-border-color);
-        }
+    &.gr-textfield--enabled .gr-textfield__container {
+        border-color: var(--gray-border-color);
 
-        &:hover .gr-textfield__border {
+        &:hover {
             border-color: var(--gray-border-color-hover);
         }
     }
@@ -334,9 +288,6 @@
 
         .gr-textfield__container {
             background-color: var(--disabled-input-background-color);
-        }
-
-        .gr-textfield__border {
             border-color: var(--disabled-input-border-color);
         }
     }
@@ -346,16 +297,113 @@
             background-color: white;
         }
 
-        &.gr-textfield--primary .gr-textfield__border {
+        &.gr-textfield--primary .gr-textfield__container {
             border-color: var(--primary-color);
         }
 
-        &.gr-textfield--secondary .gr-textfield__border {
+        &.gr-textfield--secondary .gr-textfield__container {
             border-color: var(--secondary-color);
         }
 
-        &.gr-textfield--tertiary .gr-textfield__border {
+        &.gr-textfield--tertiary .gr-textfield__container {
             border-color: var(--tertiary-color);
         }
+    }
+}
+
+// Placeholder positions - Inside
+.gr-textfield--placeholder-inside.gr-textfield--focus,
+.gr-textfield--placeholder-inside.gr-textfield--content-filled {
+    &.gr-textfield--small {
+        .gr-textfield__placeholder {
+            top: 4px;
+            font-size: 0.55rem;
+        }
+
+        .gr-textfield__input {
+            padding-top: 9px;
+        }
+    }
+
+    &.gr-textfield--medium {
+        .gr-textfield__placeholder {
+            top: 6px;
+            font-size: 0.65rem;
+        }
+
+        .gr-textfield__input {
+            padding-top: 11px;
+        }
+    }
+
+    &.gr-textfield--large {
+        .gr-textfield__placeholder {
+            top: 8px;
+            font-size: 0.75rem;
+        }
+
+        .gr-textfield__input {
+            padding-top: 13px;
+        }
+    }
+}
+
+// Placeholder positions - Outside
+.gr-textfield--placeholder-outside.gr-textfield--focus,
+.gr-textfield--placeholder-outside.gr-textfield--content-filled {
+    .gr-textfield__label {
+        opacity: 0;
+    }
+
+    &.gr-textfield--small .gr-textfield__placeholder {
+        top: -20px;
+        left: 0;
+        font-size: 0.75rem;
+        color: var(--gray-text-color);
+    }
+
+    &.gr-textfield--medium .gr-textfield__placeholder {
+        top: -23px;
+        left: 0;
+        font-size: 0.85rem;
+        color: var(--gray-text-color);
+    }
+
+    &.gr-textfield--large .gr-textfield__placeholder {
+        top: -27px;
+        left: 0;
+        font-size: 0.95rem;
+        color: var(--gray-text-color);
+    }
+}
+
+// Placeholder positions - Overline
+.gr-textfield--placeholder-overline.gr-textfield--focus,
+.gr-textfield--placeholder-overline.gr-textfield--content-filled {
+    .gr-textfield__label {
+        opacity: 0;
+    }
+
+    .gr-textfield__placeholder {
+        color: var(--gray-text-color);
+        padding: 0 5px;
+    }
+
+    &.gr-textfield--small .gr-textfield__placeholder {
+        top: -10px;
+        font-size: 0.75rem;
+        left: 7px;
+    }
+
+    &.gr-textfield--medium .gr-textfield__placeholder {
+        top: -11px;
+        font-size: 0.85rem;
+        left: 10px;
+    }
+
+    &.gr-textfield--large .gr-textfield__placeholder {
+        top: -12px;
+        font-size: 0.95rem;
+        left: 13px;
     }
 }

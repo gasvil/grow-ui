@@ -9,6 +9,7 @@ import {
 export interface TextfieldArgs {
     refId?: string
     label?: string
+    value?: string
     size?: TextfieldSize
     type?: TextfieldType
     state?: TextfieldState
@@ -24,6 +25,7 @@ export const GrTextfieldTemplate = (args: TextfieldArgs) => {
 
     args.refId && grTextfield.setAttribute('ref-id', args.refId)
     args.label && grTextfield.setAttribute('label', args.label)
+    args.value && grTextfield.setAttribute('value', args.value)
     args.size && grTextfield.setAttribute('size', args.size)
     args.type && grTextfield.setAttribute('type', args.type)
     args.state && grTextfield.setAttribute('state', args.state)

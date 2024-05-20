@@ -37,6 +37,7 @@
 
     /*Transitions*/
     --transition-hover: var(--gr-transition-hover, 0.15s);
+    --transition-position: var(--gr-transition-position, 0.25s);
 
     /*Decorations*/
     --corner-radius: var(--gr-corner-radius, 5px);

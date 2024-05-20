@@ -1,6 +1,6 @@
 import {html, LitElement, PropertyValues} from "lit";
 import {customElement, property} from "lit/decorators.js";
-import {modifiersToBem} from "../../commons/scripts/functions.ts";
+import {findParentBackground, modifiersToBem} from "../../commons/scripts/functions.ts";
 import "./textfield.scss"
 import "@components/button/button"
 
@@ -18,6 +18,9 @@ export class GrTextfield extends LitElement {
 
     @property()
     label?: string
+
+    @property()
+    value: string = ''
 
     @property()
     size?: TextfieldSize = 'medium'
@@ -49,19 +52,16 @@ export class GrTextfield extends LitElement {
                 ${this.setLabel()}
                 <label class="gr-textfield__container">
                     <input
-                            type="text"
                             class="gr-textfield__input"
+                            type="text"
+                            .value="${this.value}"
                             placeholder="${!this.placeholderPosition ? this.placeholder : ''}"
                             @focusin="${this.handleFocus}"
                             @focusout="${this.handleFocus}"
+                            @input="${this.handleValue}"
                     >
                     ${this.setCustomPlaceholder()}
                     ${this.setLoadingIcon()}
-                    <div class="gr-textfield__borders">
-                        <span class="gr-textfield__border gr-textfield__border--leading"></span>
-                        <span class="gr-textfield__border gr-textfield__border--center"></span>
-                        <span class="gr-textfield__border gr-textfield__border--trailing"></span>
-                    </div>
                 </label>
             </div>
         `
@@ -69,6 +69,7 @@ export class GrTextfield extends LitElement {
 
     protected updated(_: PropertyValues) {
         this.handleFocus(undefined)
+        setTimeout(this.handlePlaceholderIn, 500)
         this.setLoadingIcon()
     }
 
@@ -85,8 +86,18 @@ export class GrTextfield extends LitElement {
         }
     }
 
-    private handlePlaceholder = (action: 'in' | 'out') => {
-        console.log('handle placeholder', action)
+    private handlePlaceholderIn = () => {
+        if (this.placeholderPosition == 'overline') {
+            const placeholder = this.querySelector('.gr-textfield__placeholder') as HTMLElement
+            const backgroundColor = findParentBackground(this)
+            if (placeholder) {
+                placeholder.style.backgroundColor = backgroundColor ?? 'white'
+            }
+        }
+    }
+
+    private handlePlaceholderOut = () => {
+
     }
 
     private setLabel = () => {
@@ -103,7 +114,9 @@ export class GrTextfield extends LitElement {
             this.type,
             this.state,
             this.priority,
-            this.error != undefined ? 'error' : null
+            'placeholder-' + this.placeholderPosition,
+            this.error != undefined ? 'error' : null,
+            this.value.length > 0 ? 'content-filled' : null
         ])
     }
 
@@ -117,11 +130,16 @@ export class GrTextfield extends LitElement {
         const target = e?.target as HTMLInputElement
         if (document.activeElement == target) {
             this.setAttribute('state', 'focus')
-            this.handlePlaceholder('in')
+            this.handlePlaceholderIn()
         } else if (this.state == 'focus') {
             this.setAttribute('state', 'enabled')
-            this.handlePlaceholder('out')
+            this.handlePlaceholderOut()
         }
+    }
+
+    private handleValue = (e: Event) => {
+        const t = e.target as HTMLInputElement
+        this.value = t.value
     }
 
     private setLoadingIcon = () => {
