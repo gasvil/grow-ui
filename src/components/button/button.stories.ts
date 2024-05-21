@@ -72,7 +72,7 @@ export default {
         },
         width: {
             description: "Define un ancho específico del botón. Puede ser un valor en px específico o el máximo ancho disponible.",
-            type: {name: "string"},
+            type: {name: "number | full"},
             control: {type: "text"},
         },
         href: {

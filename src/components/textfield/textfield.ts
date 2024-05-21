@@ -43,14 +43,17 @@ export class GrTextfield extends LitElement {
     @property({type: Boolean})
     loading?: boolean
 
-    @property()
-    error?: string
-
     @property({attribute: 'leading-icon'})
     leadingIcon?: string
 
     @property({attribute: 'trailing-icon'})
     trailingIcon?: string
+
+    @property()
+    width?: number | 'full'
+
+    @property()
+    error?: string
 
     private textfieldIcons: {
         leading?: TemplateResult,
@@ -94,7 +97,18 @@ export class GrTextfield extends LitElement {
 
     protected createRenderRoot(): HTMLElement | DocumentFragment {
         this.style.display = 'inline-block'
+        this.setWidth()
         return this
+    }
+
+    private setWidth = () => {
+        const width = this.width ?? ""
+        if (width == "full") {
+            this.style.display = "block"
+        } else if (!isNaN(parseInt(width.toString()))) {
+            this.style.display = "block"
+            this.style.maxWidth = `${this.width}px`
+        }
     }
 
     private setIcons = () => {

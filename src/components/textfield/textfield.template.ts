@@ -19,6 +19,7 @@ export interface TextfieldArgs {
     loading?: boolean
     leadingIcon?: string
     trailingIcon?: string
+    width?: number | 'full'
     error?: string
 }
 
@@ -38,6 +39,7 @@ export const GrTextfieldTemplate = (args: TextfieldArgs) => {
     args.loading && grTextfield.setAttribute('loading', '')
     args.leadingIcon && grTextfield.setAttribute('leading-icon', args.leadingIcon)
     args.trailingIcon && grTextfield.setAttribute('trailing-icon', args.trailingIcon)
+    args.width && grTextfield.setAttribute('width', args.width.toString())
     if (args.error != null) grTextfield.setAttribute('error', args.error ?? "")
 
     return grTextfield

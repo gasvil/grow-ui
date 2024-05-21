@@ -94,6 +94,11 @@ export default {
             type: {name: "string"},
             control: {type: "text"},
         },
+        width: {
+            description: "Define un ancho específico del textfield. Puede ser un valor en px específico o el máximo ancho disponible.",
+            type: {name: "number | full"},
+            control: {type: "text"},
+        },
         error: {
             description: "Texto que acompaña al cuadro de texto cuando ocurra algún error. Se acompaña de estilo asociado al error. Si no se ingresa un texto solo se muestra el estilo.",
             type: {name: "string"},
@@ -105,8 +110,7 @@ export default {
 export let Default: StoryObj
 Default = {
     args: {
-        trailingIcon: "fa-solid fa-heart",
-        leadingIcon: "fa-solid fa-fire",
+        trailingIcon: "fa-solid fa-fire",
         placeholder: "Test value",
         placeholderPosition: 'inside'
     }
