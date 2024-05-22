@@ -1,6 +1,6 @@
 import {html, LitElement, PropertyValues, TemplateResult} from "lit";
 import {customElement, property} from "lit/decorators.js";
-import {findParentBackground, modifiersToBem} from "../../commons/scripts/functions.ts";
+import {findParentBackground, getRegexFromType, modifiersToBem} from "../../commons/scripts/functions.ts";
 import "./textfield.scss"
 import "@components/button/button"
 
@@ -9,6 +9,7 @@ export type TextfieldType = 'outline' | 'outline-filled' | 'filled' | 'underline
 export type TextfieldState = 'enabled' | 'disabled' | 'focus'
 export type TextfieldPriority = 'primary' | 'secondary' | 'tertiary'
 export type TextfieldPlaceholderPosition = 'inside' | 'outside' | 'overline'
+export type TextfieldInputType = 'text' | 'number' | 'email' | 'password' | 'alphanumeric' | 'url'
 
 @customElement('gr-textfield')
 export class GrTextfield extends LitElement {
@@ -52,32 +53,45 @@ export class GrTextfield extends LitElement {
     @property()
     width?: number | 'full'
 
+    @property({attribute: 'input-type'})
+    inputType?: TextfieldInputType
+
+    @property()
+    regex?: string
+
+    @property({attribute: 'max-length'})
+    maxLength?: number
+
     @property()
     error?: string
 
-    private textfieldIcons: {
+    private _textfieldIcons: {
         leading?: TemplateResult,
         trailing?: TemplateResult,
         loading?: TemplateResult,
     } = {}
+
+    private _regex: string | undefined
 
     protected render(): TemplateResult {
         return html`
             <div class="${this.modifierStyle()}">
                 ${this.setLabel()}
                 <label class="gr-textfield__container">
-                    ${this.textfieldIcons.leading}
+                    ${this._textfieldIcons.leading}
                     <input
                             class="gr-textfield__input"
                             type="text"
                             .value="${this.value}"
-                            placeholder="${!this.placeholderPosition ? this.placeholder : ''}"
+                            pattern="${this._regex ? this._regex : null}"
+                            placeholder="${!this.placeholderPosition ? this.placeholder : null}"
+                            maxlength="${this.maxLength}"
                             @focusin="${this.handleFocus}"
                             @focusout="${this.handleFocus}"
                             @input="${this.handleValue}"
                     >
-                    ${this.textfieldIcons.trailing}
-                    ${this.textfieldIcons.loading}
+                    ${this._textfieldIcons.trailing}
+                    ${this._textfieldIcons.loading}
                     ${this.setCustomPlaceholder()}
                     ${this.setErrorMessage()}
                 </label>
@@ -112,11 +126,11 @@ export class GrTextfield extends LitElement {
     }
 
     private setIcons = () => {
-        this.leadingIcon && (this.textfieldIcons.leading = html`<i
+        this.leadingIcon && (this._textfieldIcons.leading = html`<i
                 class="gr-textfield__icon gr-textfield__icon--leading ${this.leadingIcon}"></i>`)
-        this.trailingIcon && (this.textfieldIcons.trailing = html`<i
+        this.trailingIcon && (this._textfieldIcons.trailing = html`<i
                 class="gr-textfield__icon gr-textfield__icon--trailing ${this.trailingIcon}"></i>`)
-        this.loading && (this.textfieldIcons.loading = html`
+        this.loading && (this._textfieldIcons.loading = html`
             <gr-loader class="gr-textfield__loader" size="15" thickness="2" priority="${this.priority}"></gr-loader>`)
     }
 
@@ -178,14 +192,24 @@ export class GrTextfield extends LitElement {
         if (document.activeElement == target) {
             this.setAttribute('state', 'focus')
             this.handlePlaceholderIn()
+            this.setRegex()
         } else if (this.state == 'focus') {
             this.setAttribute('state', 'enabled')
+        }
+    }
+
+    private setRegex = () => {
+        if (this.regex) {
+            this._regex = this.regex
+        } else if (!this.regex && this.inputType) {
+            this._regex = getRegexFromType(this.inputType)
         }
     }
 
     private handleValue = (e: Event) => {
         const t = e.target as HTMLInputElement
         this.value = t.value
+        console.log('Valid:: ', !t.validity.patternMismatch)
     }
 
 }

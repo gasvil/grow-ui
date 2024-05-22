@@ -11,7 +11,7 @@ export default {
     },
     argTypes: {
         refId: {
-            description: "Define un id que será aplicado al textfield contenido dentro de la etiqueta gr-textfield",
+            description: "Define un id que será aplicado al campo de texto contenido dentro de la etiqueta gr-textfield",
             name: "ref-id",
             type: {name: "string"},
             control: {type: "text"},
@@ -22,12 +22,12 @@ export default {
             control: {type: "text"},
         },
         value: {
-            description: "Texto del contenido del botón.",
+            description: "Texto del contenido del campo de texto.",
             type: {name: "string"},
             control: {type: "text"},
         },
         size: {
-            description: "Tamaño del textfield",
+            description: "Tamaño del campo de texto",
             type: {name: "small | medium, large"},
             control: {type: "select"},
             options: ['small', 'medium', 'large'],
@@ -36,7 +36,7 @@ export default {
             }
         },
         type: {
-            description: "Estilo del contenedor del textfield",
+            description: "Estilo del contenedor del campo de texto",
             type: {name: "outline | outline-filled | filled | underline | underline-filled"},
             control: {type: 'select'},
             options: ['outline', 'outline-filled', 'filled', 'underline', 'underline-filled'],
@@ -45,7 +45,7 @@ export default {
             }
         },
         state: {
-            description: "Estado actual del textfield.",
+            description: "Estado actual del campo de texto.",
             type: {name: "enabled | disabled | focus"},
             control: {type: "select"},
             options: ['enabled', 'disabled', 'focus'],
@@ -54,7 +54,7 @@ export default {
             }
         },
         priority: {
-            description: "Color del textfield en base a su prioridad",
+            description: "Color del campo de texto en base a su prioridad",
             type: {name: "primary | secondary | tertiary"},
             control: {type: "select"},
             options: ['primary', 'secondary', 'tertiary'],
@@ -68,14 +68,14 @@ export default {
             control: {type: "text"},
         },
         placeholderPosition: {
-            description: "Lugar al que se moverá el placeholder cuando se active el foco del textfield. Si la propiedad no se define el texto no se animará y solo se ocultará al ingresar el texto.",
+            description: "Lugar al que se moverá el placeholder cuando se active el foco del campo de texto. Si la propiedad no se define el texto no se animará y solo se ocultará al ingresar el texto.",
             name: "placeholder-position",
             type: {name: "inside | outside | overline"},
             control: {type: "select"},
             options: ['inside', 'outside', 'overline'],
         },
         loading: {
-            description: "Indica un estado de carga mostrando un icono al lado derecho del textfield.",
+            description: "Indica un estado de carga mostrando un icono al lado derecho del campo de texto.",
             type: {name: "boolean"},
             control: {type: "boolean"},
             table: {
@@ -83,24 +83,42 @@ export default {
             }
         },
         leadingIcon: {
-            description: "Ícono que se mostrará al lado izquierdo del textfield. Si está usando una tipografía de fuentes, solo debe agregar la clase del ícono que desea mostrar.",
+            description: "Ícono que se mostrará al lado izquierdo del campo de texto. Si está usando una tipografía de fuentes, solo debe agregar la clase del ícono que desea mostrar.",
             name: "leading-icon",
             type: {name: "string"},
             control: {type: "text"},
         },
         trailingIcon: {
-            description: "Ícono que se mostrará al lado derecho del textfield. Si está usando una tipografía de fuentes, solo debe agregar la clase del ícono que desea mostrar.",
+            description: "Ícono que se mostrará al lado derecho del campo de texto. Si está usando una tipografía de fuentes, solo debe agregar la clase del ícono que desea mostrar.",
             name: "trailing-icon",
             type: {name: "string"},
             control: {type: "text"},
         },
         width: {
-            description: "Define un ancho específico del textfield. Puede ser un valor en px específico o el máximo ancho disponible.",
+            description: "Define un ancho específico del campo de texto. Puede ser un valor en px específico o el máximo ancho disponible.",
             type: {name: "number | full"},
             control: {type: "text"},
         },
+        inputType: {
+            description: "Define un tipo de dato predeterminado que aceptara el campo de texto para su validación mediante expresiones regulares. Puedes acompañar el tipo con una expresión regular personalizada en el atributo regex. Para el tipo password se usa una validación de mínimo 8 caracteres, una minúscula, una mayúscula y un dígito numérico.",
+            name: 'input-type',
+            type: {name: "text | number | email | password | alphanumeric | url"},
+            control: {type: "select"},
+            options: ['text', 'number', 'email', 'password', 'alphanumeric', 'url'],
+        },
+        regex: {
+            description: "Define una expresión regular que reemplazará a los valores por defecto del campo input-type.",
+            type: {name: "RegExp"},
+            control: {type: "text"},
+        },
+        maxLength: {
+            description: "Define un tamaño máximo para el contenido del campo de texto.",
+            name: "max-length",
+            type: {name: "number"},
+            control: {type: "number"}
+        },
         error: {
-            description: "Texto que acompaña al cuadro de texto cuando ocurra algún error. Se acompaña de estilo asociado al error. Si no se ingresa un texto solo se muestra el estilo.",
+            description: "Texto que acompaña al campo de texto cuando ocurra algún error. Se acompaña de estilo asociado al error. Si no se ingresa un texto solo se muestra el estilo.",
             type: {name: "string"},
             control: {type: "text"}
         }

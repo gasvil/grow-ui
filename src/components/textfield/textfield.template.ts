@@ -1,4 +1,5 @@
 import {
+    TextfieldInputType,
     TextfieldPlaceholderPosition,
     TextfieldPriority,
     TextfieldSize,
@@ -20,6 +21,9 @@ export interface TextfieldArgs {
     leadingIcon?: string
     trailingIcon?: string
     width?: number | 'full'
+    inputType?: TextfieldInputType
+    regex?: string
+    maxLength?: number
     error?: string
 }
 
@@ -40,6 +44,10 @@ export const GrTextfieldTemplate = (args: TextfieldArgs) => {
     args.leadingIcon && grTextfield.setAttribute('leading-icon', args.leadingIcon)
     args.trailingIcon && grTextfield.setAttribute('trailing-icon', args.trailingIcon)
     args.width && grTextfield.setAttribute('width', args.width.toString())
+    args.inputType && grTextfield.setAttribute('input-type', args.inputType)
+    args.regex && grTextfield.setAttribute('regex', args.regex)
+    args.maxLength && grTextfield.setAttribute('max-length', args.maxLength.toString())
+
     if (args.error != null) grTextfield.setAttribute('error', args.error ?? "")
 
     return grTextfield
