@@ -48,7 +48,15 @@
         --gr-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1);
     }
 
-    #root-inner > *:not(:last-child) {
-        margin-right: 7px;
+    #root-inner {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #story--grow-button--width-inner #root-inner,
+    #story--grow-textfield--types-inner #root-inner,
+    #story--grow-textfield--placeholder-position-inner #root-inner {
+        display: unset;
     }
 </style>

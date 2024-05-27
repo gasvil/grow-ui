@@ -49,6 +49,9 @@
         font-family: inherit;
         color: var(--gray-placeholder-color);
         transition: var(--transition-hover);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     &__loader {
@@ -87,6 +90,7 @@
     .gr-textfield__placeholder {
         top: calc(50% - 9px);
         left: 12px;
+        max-width: calc(100% - 24px);
     }
 
     .gr-textfield__loader {
@@ -108,6 +112,7 @@
     .gr-textfield__placeholder {
         top: calc(50% - 10px);
         left: 15px;
+        max-width: calc(100% - 30px);
     }
 
     .gr-textfield__loader {
@@ -130,6 +135,7 @@
     .gr-textfield__placeholder {
         top: calc(50% - 11px);
         left: 18px;
+        max-width: calc(100% - 36px);
     }
 
     .gr-textfield__loader {

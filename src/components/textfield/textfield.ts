@@ -75,7 +75,7 @@ export class GrTextfield extends LitElement {
 
     protected render(): TemplateResult {
         return html`
-            <div class="${this.modifierStyle()}">
+            <div id="${this.refId}" class="${this.modifierStyle()}">
                 ${this.setLabel()}
                 <label class="gr-textfield__container">
                     ${this._textfieldIcons.leading}
@@ -209,6 +209,15 @@ export class GrTextfield extends LitElement {
     private handleValue = (e: Event) => {
         const t = e.target as HTMLInputElement
         this.value = t.value
+
+        const inputEvent = new CustomEvent('gr-input', e)
+        this.dispatchEvent(inputEvent)
+
+        if (!t.validity.patternMismatch) {
+            const errorEvent = new CustomEvent('gr-error', e)
+            this.dispatchEvent(errorEvent)
+        }
+
         console.log('Valid:: ', !t.validity.patternMismatch)
     }
 

@@ -1,6 +1,7 @@
 import {GrTextfieldTemplate, TextfieldArgs} from "./textfield.template.ts";
 import {StoryObj} from "@storybook/web-components";
 import "@components/textfield/textfield"
+import {html} from "lit";
 
 export default {
     title: "Grow/Textfield",
@@ -128,8 +129,82 @@ export default {
 export let Default: StoryObj
 Default = {
     args: {
-        trailingIcon: "fa-solid fa-fire",
-        placeholder: "Test value",
-        placeholderPosition: 'inside'
+        placeholder: 'Default textfield'
+    }
+}
+
+export let Sizes: StoryObj
+Sizes = {
+    render: (args) => html`
+        ${GrTextfieldTemplate({placeholder: 'Small textfield', size: 'small', ...args})}
+        ${GrTextfieldTemplate({placeholder: 'Medium textfield', size: 'medium', ...args})}
+        ${GrTextfieldTemplate({placeholder: 'Large textfield', size: 'large', ...args})}
+    `
+}
+
+export let Types: StoryObj
+Types = {
+    render: (args) => html`
+        ${GrTextfieldTemplate({placeholder: 'Outline textfield', width: 300, type: 'outline', ...args})}
+        <br>
+        ${GrTextfieldTemplate({placeholder: 'Outline filled textfield', width: 300, type: 'outline-filled', ...args})}
+        <br>
+        ${GrTextfieldTemplate({placeholder: 'Filled textfield', width: 300, type: 'filled', ...args})}
+        <br>
+        ${GrTextfieldTemplate({placeholder: 'Underline textfield', width: 300, type: 'underline', ...args})}
+        <br>
+        ${GrTextfieldTemplate({
+            placeholder: 'Underline filled textfield',
+            width: 300,
+            type: 'underline-filled', ...args
+        })}
+    `
+}
+
+export let States: StoryObj
+States = {
+    render: (args) => html`
+        ${GrTextfieldTemplate({placeholder: 'Enabled textfield', state: 'enabled', ...args})}
+        ${GrTextfieldTemplate({placeholder: 'Disabled textfield', state: 'disabled', ...args})}
+    `
+}
+
+export let Priority: StoryObj
+Priority = {
+    render: (args) => html`
+        ${GrTextfieldTemplate({placeholder: 'Primary textfield', priority: 'primary', ...args})}
+        ${GrTextfieldTemplate({placeholder: 'Secondary textfield', priority: 'secondary', ...args})}
+        ${GrTextfieldTemplate({placeholder: 'Tertiary textfield', priority: 'tertiary', ...args})}
+    `
+}
+
+export let PlaceholderPosition: StoryObj
+PlaceholderPosition = {
+    render: (args) => html`
+        ${GrTextfieldTemplate({
+            placeholder: 'Placeholder outside textfield',
+            width: 300,
+            placeholderPosition: 'outside', ...args
+        })}
+        <br>
+        ${GrTextfieldTemplate({
+            placeholder: 'Placeholder inside textfield',
+            width: 300,
+            placeholderPosition: 'inside', ...args
+        })}
+        <br>
+        ${GrTextfieldTemplate({
+            placeholder: 'Placeholder overline textfield',
+            width: 300,
+            placeholderPosition: 'overline', ...args
+        })}
+    `
+}
+
+export let Loading: StoryObj
+Loading = {
+    args: {
+        placeholder: 'Loading textfield',
+        loading: true
     }
 }
