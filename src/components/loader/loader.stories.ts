@@ -41,18 +41,26 @@ export default {
             table: {
                 defaultValue: {summary: false}
             }
+        },
+        gray: {
+            description: "Muestra el loader en un estado inactivo/gris.",
+            type: {name: "boolean"},
+            control: {type: "boolean"},
+            table: {
+                defaultValue: {summary: false}
+            }
         }
     }
 }
 
-export let Default: StoryObj;
+export let Default: StoryObj
 Default = {
     args: {
         negative: false
     }
-};
+}
 
-export let Negative: StoryObj;
+export let Negative: StoryObj
 Negative = {
     args: {
         negative: true
@@ -60,4 +68,11 @@ Negative = {
     parameters: {
         backgrounds: {default: 'dark'}
     }
-};
+}
+
+export let Gray: StoryObj
+Gray = {
+    args: {
+        gray: true
+    }
+}

@@ -20,6 +20,9 @@ export class GrLoader extends LitElement {
     @property({type: Boolean})
     negative: boolean | undefined = false
 
+    @property({type: Boolean})
+    gray: boolean = false
+
     protected render(): TemplateResult {
         return html`
             <div class="${this.modifierStyle()}">
@@ -51,7 +54,8 @@ export class GrLoader extends LitElement {
     private modifierStyle = () => {
         return modifiersToBem('loader', [
             this.priority,
-            this.negative ? 'negative' : ''
+            this.negative ? 'negative' : null,
+            this.gray ? 'gray' : null
         ])
     }
 

@@ -131,7 +131,8 @@ export class GrTextfield extends LitElement {
         this.trailingIcon && (this._textfieldIcons.trailing = html`<i
                 class="gr-textfield__icon gr-textfield__icon--trailing ${this.trailingIcon}"></i>`)
         this.loading && (this._textfieldIcons.loading = html`
-            <gr-loader class="gr-textfield__loader" size="15" thickness="2" priority="${this.priority}"></gr-loader>`)
+            <gr-loader class="gr-textfield__loader" size="15" thickness="2" priority="${this.priority}"
+                       gray></gr-loader>`)
     }
 
     private setCustomPlaceholder = () => {
@@ -189,11 +190,14 @@ export class GrTextfield extends LitElement {
         }
 
         const target = e?.target as HTMLInputElement
+        const loader = this.querySelector('.gr-textfield__loader') as HTMLElement
         if (document.activeElement == target) {
+            loader?.removeAttribute('gray')
             this.setAttribute('state', 'focus')
             this.handlePlaceholderIn()
             this.setRegex()
         } else if (this.state == 'focus') {
+            loader?.setAttribute('gray', '')
             this.setAttribute('state', 'enabled')
         }
     }
