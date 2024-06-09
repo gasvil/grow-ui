@@ -8,7 +8,10 @@ export default {
     tags: ["autodocs"],
     render: (args: ButtonArgs) => GrButtonTemplate(args),
     parameters: {
-        backgrounds: {default: 'light'}
+        backgrounds: {default: 'light'},
+        docs: {
+            description: {component: 'Basic button that handle any action.'}
+        }
     },
     argTypes: {
         refId: {

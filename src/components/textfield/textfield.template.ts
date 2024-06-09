@@ -29,7 +29,6 @@ export interface TextfieldArgs {
 
 export const GrTextfieldTemplate = (args: TextfieldArgs) => {
     const grTextfield = document.createElement('gr-textfield')
-    console.log(args.error)
 
     args.refId && grTextfield.setAttribute('ref-id', args.refId)
     args.label && grTextfield.setAttribute('label', args.label)

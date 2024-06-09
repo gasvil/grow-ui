@@ -245,5 +245,33 @@ InputTypes = {
         ${GrTextfieldTemplate({placeholder: 'Type alphanumeric', inputType: 'alphanumeric', ...args})}
         <br>
         ${GrTextfieldTemplate({placeholder: 'Type url', inputType: 'url', ...args})}
+        <script type="text/javascript">
+            const textFields = document.querySelectorAll('gr-textfield[input-type]')
+            console.log(textFields)
+            textFields.forEach(it => {
+                it.addEventListener('gr-error', () => {
+                    it.setAttribute('error', 'Invalid value')
+                })
+                it.addEventListener('gr-input', () => {
+                    it.removeAttribute('error')
+                })
+            })
+        </script>
+    `
+}
+
+export let MaxLength: StoryObj
+MaxLength = {
+    args: {
+        maxLength: 5,
+        placeholder: '5 max length'
+    }
+}
+
+export let Error: StoryObj
+Error = {
+    render: (args) => html`
+        ${GrTextfieldTemplate({placeholder: 'Error with message', error: 'Some error message', ...args})}
+        ${GrTextfieldTemplate({placeholder: 'Error without message', error: '', ...args})}
     `
 }

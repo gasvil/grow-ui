@@ -93,8 +93,8 @@ export class GrTextfield extends LitElement {
                     ${this._textfieldIcons.trailing}
                     ${this._textfieldIcons.loading}
                     ${this.setCustomPlaceholder()}
-                    ${this.setErrorMessage()}
                 </label>
+                ${this.setErrorMessage()}
             </div>
         `
     }
@@ -212,17 +212,20 @@ export class GrTextfield extends LitElement {
 
     private handleValue = (e: Event) => {
         const t = e.target as HTMLInputElement
-        this.value = t.value
 
-        const inputEvent = new CustomEvent('gr-input', e)
-        this.dispatchEvent(inputEvent)
-
-        if (!t.validity.patternMismatch) {
-            const errorEvent = new CustomEvent('gr-error', e)
-            this.dispatchEvent(errorEvent)
+        if (t.validity.patternMismatch) {
+            if (['password', 'email', 'url', undefined].includes(this.inputType)) {
+                const errorEvent = new CustomEvent('gr-error', e)
+                this.dispatchEvent(errorEvent)
+                this.value = t.value
+            }
+        } else {
+            const inputEvent = new CustomEvent('gr-input', e)
+            this.dispatchEvent(inputEvent)
+            this.value = t.value
         }
 
-        console.log('Valid:: ', !t.validity.patternMismatch)
+        t.value = this.value
     }
 
 }
