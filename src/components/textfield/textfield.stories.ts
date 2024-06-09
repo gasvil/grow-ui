@@ -208,3 +208,42 @@ Loading = {
         loading: true
     }
 }
+
+export let Icons: StoryObj
+Icons = {
+    render: (args) => html`
+        ${GrTextfieldTemplate({placeholder: 'Leading icon', leadingIcon: 'fa-solid fa-star', ...args})}
+        ${GrTextfieldTemplate({placeholder: 'Trailing icon', trailingIcon: 'fa-solid fa-star', ...args})}
+    `
+}
+
+export let Width: StoryObj
+Width = {
+    render: (args) => html`
+        ${GrTextfieldTemplate({placeholder: '300px textfield', width: 300, ...args})}
+        <br>
+        ${GrTextfieldTemplate({placeholder: '500px textfield', width: 500, ...args})}
+        <br>
+        ${GrTextfieldTemplate({placeholder: 'full textfield', width: 'full', ...args})}
+    `
+}
+
+export let InputTypes: StoryObj
+InputTypes = {
+    args: {
+        width: 'full'
+    },
+    render: (args) => html`
+        ${GrTextfieldTemplate({placeholder: 'Type text', inputType: 'text', ...args})}
+        <br>
+        ${GrTextfieldTemplate({placeholder: 'Type number', inputType: 'number', ...args})}
+        <br>
+        ${GrTextfieldTemplate({placeholder: 'Type email', inputType: 'email', ...args})}
+        <br>
+        ${GrTextfieldTemplate({placeholder: 'Type password', inputType: 'password', ...args})}
+        <br>
+        ${GrTextfieldTemplate({placeholder: 'Type alphanumeric', inputType: 'alphanumeric', ...args})}
+        <br>
+        ${GrTextfieldTemplate({placeholder: 'Type url', inputType: 'url', ...args})}
+    `
+}
