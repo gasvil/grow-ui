@@ -103,9 +103,21 @@ export default {
         inputType: {
             description: "Define un tipo de dato predeterminado que aceptara el campo de texto para su validación mediante expresiones regulares. Puedes acompañar el tipo con una expresión regular personalizada en el atributo regex. Para el tipo password se usa una validación de mínimo 8 caracteres, una minúscula, una mayúscula y un dígito numérico.",
             name: 'input-type',
-            type: {name: "text | number | email | password | alphanumeric | url"},
+            type: {name: "text | number | email | password | password-eye | alphanumeric | url"},
             control: {type: "select"},
-            options: ['text', 'number', 'email', 'password', 'alphanumeric', 'url'],
+            options: ['text', 'number', 'email', 'password', 'password-eye', 'alphanumeric', 'url'],
+        },
+        passwordIconOn: {
+            description: "Define un ícono para el botón de ojo abierto que muestra u oculta la contraseña. Si no se define se usará un ícono por defecto.",
+            name: "password-icon-on",
+            type: {name: "string"},
+            control: {type: "text"},
+        },
+        passwordIconOff: {
+            description: "Define un ícono para el botón de ojo cerrado que muestra u oculta la contraseña. Si no se define se usará un ícono por defecto.",
+            name: "password-icon-off",
+            type: {name: "string"},
+            control: {type: "text"},
         },
         regex: {
             description: "Define una expresión regular que reemplazará a los valores por defecto del campo input-type.",
@@ -129,7 +141,7 @@ export default {
 export let Default: StoryObj
 Default = {
     args: {
-        placeholder: 'Default textfield'
+        placeholder: 'Default textfield',
     }
 }
 
@@ -247,9 +259,9 @@ InputTypes = {
         ${GrTextfieldTemplate({placeholder: 'Type url', inputType: 'url', ...args})}
         <script type="text/javascript">
             const textFields = document.querySelectorAll('gr-textfield[input-type]')
-            console.log(textFields)
             textFields.forEach(it => {
                 it.addEventListener('gr-error', () => {
+                    console.log('error')
                     it.setAttribute('error', 'Invalid value')
                 })
                 it.addEventListener('gr-input', () => {
@@ -258,6 +270,16 @@ InputTypes = {
             })
         </script>
     `
+}
+
+export let PasswordIcon: StoryObj
+PasswordIcon = {
+    args: {
+        passwordIconOn: 'fa-solid fa-eye',
+        passwordIconOff: 'fa-solid fa-eye-slash',
+        inputType: 'password',
+        value: 'Discover password'
+    }
 }
 
 export let MaxLength: StoryObj

@@ -6,7 +6,6 @@
     --font: var(--gr-font, sans-serif);
     --font-weight: var(--gr-font-weight, 400);
 
-
     /*Colors*/
     --primary-color: var(--gr-primary-color, #2BBCBC);
     --primary-color-opacity: var(--gr-primary-color-opacity, #2BBCBC4D);
@@ -48,4 +47,18 @@
 
 [class^="gr-"] {
     box-sizing: border-box;
+}
+
+button[class^="gr-"] {
+    cursor: pointer;
+    appearance: none;
+    background-color: transparent;
+    outline: none;
+    user-select: none;
+    border: none;
+    padding: 0;
+
+    &:active {
+        transform: translateY(1px);
+    }
 }

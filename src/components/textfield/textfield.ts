@@ -1,5 +1,5 @@
 import {html, LitElement, PropertyValues, TemplateResult} from "lit";
-import {customElement, property} from "lit/decorators.js";
+import {customElement, property, query, state} from "lit/decorators.js";
 import {findParentBackground, getRegexFromType, modifiersToBem} from "../../commons/scripts/functions.ts";
 import "./textfield.scss"
 import "@components/button/button"
@@ -56,6 +56,12 @@ export class GrTextfield extends LitElement {
     @property({attribute: 'input-type'})
     inputType?: TextfieldInputType
 
+    @property({attribute: 'password-icon-on'})
+    passwordIconOn?: string
+
+    @property({attribute: 'password-icon-off'})
+    passwordIconOff?: string
+
     @property()
     regex?: string
 
@@ -64,6 +70,15 @@ export class GrTextfield extends LitElement {
 
     @property()
     error?: string
+
+    @state()
+    private _showPassword: boolean = false
+
+    @state()
+    private _inputType: string = 'text'
+
+    @query(".gr-textfield__input")
+    private _ref: HTMLInputElement | undefined
 
     private _textfieldIcons: {
         leading?: TemplateResult,
@@ -81,7 +96,7 @@ export class GrTextfield extends LitElement {
                     ${this._textfieldIcons.leading}
                     <input
                             class="gr-textfield__input"
-                            type="text"
+                            type="${this._inputType}"
                             .value="${this.value}"
                             pattern="${this._regex ? this._regex : null}"
                             placeholder="${!this.placeholderPosition ? this.placeholder : null}"
@@ -92,6 +107,7 @@ export class GrTextfield extends LitElement {
                     >
                     ${this._textfieldIcons.trailing}
                     ${this._textfieldIcons.loading}
+                    ${this.setPasswordIcon()}
                     ${this.setCustomPlaceholder()}
                 </label>
                 ${this.setErrorMessage()}
@@ -99,7 +115,7 @@ export class GrTextfield extends LitElement {
         `
     }
 
-    protected updated(_: PropertyValues) {
+    protected updated(_: PropertyValues): void {
         this.handleFocus(undefined)
         setTimeout(this.handlePlaceholderIn, 500)
     }
@@ -111,11 +127,12 @@ export class GrTextfield extends LitElement {
 
     protected createRenderRoot(): HTMLElement | DocumentFragment {
         this.style.display = 'inline-block'
+        this._inputType = this.inputType == 'password' ? 'password' : 'text'
         this.setWidth()
         return this
     }
 
-    private setWidth = () => {
+    private setWidth = (): void => {
         const width = this.width ?? ""
         if (width == "full") {
             this.style.display = "block"
@@ -125,7 +142,7 @@ export class GrTextfield extends LitElement {
         }
     }
 
-    private setIcons = () => {
+    private setIcons = (): void => {
         this.leadingIcon && (this._textfieldIcons.leading = html`<i
                 class="gr-textfield__icon gr-textfield__icon--leading ${this.leadingIcon}"></i>`)
         this.trailingIcon && (this._textfieldIcons.trailing = html`<i
@@ -135,7 +152,7 @@ export class GrTextfield extends LitElement {
                        gray></gr-loader>`)
     }
 
-    private setCustomPlaceholder = () => {
+    private setCustomPlaceholder = (): TemplateResult | null => {
         if (this.placeholderPosition) {
             return html`<span class="gr-textfield__placeholder">${this.placeholder}</span>`
         } else {
@@ -143,7 +160,31 @@ export class GrTextfield extends LitElement {
         }
     }
 
-    private setErrorMessage = () => {
+    private setPasswordIcon = (): TemplateResult | null => {
+        let passwordIcon = this._showPassword ? this.passwordIconOff : this.passwordIconOn
+        if (passwordIcon && this.inputType == 'password') {
+            return html`
+                <button
+                        type="button"
+                        class="gr-textfield__icon gr-textfield__icon--password ${passwordIcon}"
+                        @click="${this.handlePasswordAction}"
+                ></button>`
+        } else {
+            return null
+        }
+    }
+
+    private handlePasswordAction = (): void => {
+        this._showPassword = !this._showPassword
+        this._inputType = this._showPassword ? 'text' : 'password'
+        const contentLength = this._ref?.value.length ?? 0
+        this._ref?.focus()
+        setTimeout(() => {
+            this._ref?.setSelectionRange(contentLength, contentLength)
+        })
+    }
+
+    private setErrorMessage = (): TemplateResult | null => {
         if (this.error && this.error.length > 0) {
             return html`<span class="gr-textfield__error-msg">${this.error}</span>`
         } else {
@@ -151,7 +192,7 @@ export class GrTextfield extends LitElement {
         }
     }
 
-    private handlePlaceholderIn = () => {
+    private handlePlaceholderIn = (): void => {
         if (this.placeholderPosition == 'overline') {
             const placeholder = this.querySelector('.gr-textfield__placeholder') as HTMLElement
             const backgroundColor = findParentBackground(this)
@@ -161,7 +202,7 @@ export class GrTextfield extends LitElement {
         }
     }
 
-    private setLabel = () => {
+    private setLabel = (): TemplateResult | null => {
         if (this.label) {
             return html`<span class="gr-textfield__label">${this.label}</span>`
         } else {
@@ -182,7 +223,7 @@ export class GrTextfield extends LitElement {
         ])
     }
 
-    private handleFocus = (e?: Event) => {
+    private handleFocus = (e?: Event): void => {
         if (e == undefined && this.state == 'focus') {
             const input = this.querySelector('.gr-textfield__input') as HTMLInputElement
             input.focus()
@@ -202,7 +243,7 @@ export class GrTextfield extends LitElement {
         }
     }
 
-    private setRegex = () => {
+    private setRegex = (): void => {
         if (this.regex) {
             this._regex = this.regex
         } else if (!this.regex && this.inputType) {
@@ -210,7 +251,7 @@ export class GrTextfield extends LitElement {
         }
     }
 
-    private handleValue = (e: Event) => {
+    private handleValue = (e: Event): void => {
         const t = e.target as HTMLInputElement
 
         if (t.validity.patternMismatch) {

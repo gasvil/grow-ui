@@ -22,6 +22,8 @@ export interface TextfieldArgs {
     trailingIcon?: string
     width?: number | 'full'
     inputType?: TextfieldInputType
+    passwordIconOn?: string
+    passwordIconOff?: string
     regex?: string
     maxLength?: number
     error?: string
@@ -44,6 +46,8 @@ export const GrTextfieldTemplate = (args: TextfieldArgs) => {
     args.trailingIcon && grTextfield.setAttribute('trailing-icon', args.trailingIcon)
     args.width && grTextfield.setAttribute('width', args.width.toString())
     args.inputType && grTextfield.setAttribute('input-type', args.inputType)
+    args.passwordIconOn && grTextfield.setAttribute('password-icon-on', args.passwordIconOn)
+    args.passwordIconOff && grTextfield.setAttribute('password-icon-off', args.passwordIconOff)
     args.regex && grTextfield.setAttribute('regex', args.regex)
     args.maxLength && grTextfield.setAttribute('max-length', args.maxLength.toString())
 

@@ -33,8 +33,8 @@ export const findParentBackground = (element: HTMLElement): string | null => {
     return null
 }
 
-export const getRegexFromType = (type: 'text' | 'number' | 'email' | 'password' | 'alphanumeric' | 'url'): string => {
-    const regexMap: { [key in typeof type]: string } = {
+export const getRegexFromType = (inputType: 'text' | 'number' | 'email' | 'password' | 'alphanumeric' | 'url'): string => {
+    const regexMap: { [key in typeof inputType]: string } = {
         text: "^[a-zA-Z\\s]+$",
         number: "^[0-9]+$",
         email: "^[a-zA-Z0-9_\\.\\%\\+\\-]+@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}$",
@@ -43,5 +43,5 @@ export const getRegexFromType = (type: 'text' | 'number' | 'email' | 'password' 
         url: "^(http[s]?:\\/\\/)?(www\\.)?[a-zA-Z0-9]+(\\.[a-zA-Z]{2,}){1,3}(\\/\\S*)?$"
     }
 
-    return regexMap[type]
+    return regexMap[inputType]
 }

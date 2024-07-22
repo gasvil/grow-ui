@@ -63,12 +63,16 @@
     &__icon {
         color: var(--gray-placeholder-color);
         transition: var(--transition-hover);
+        font-size: 16px;
+        width: 18px;
+        text-align: center;
+        display: inline-block;
 
         &--leading {
             margin-right: 10px;
         }
 
-        &--trailing {
+        &--trailing, &--password {
             margin-left: 10px;
         }
     }
@@ -467,6 +471,10 @@
         &:hover {
             border-color: var(--error-color);
         }
+    }
+
+    .gr-textfield__icon {
+        color: var(--error-color) !important;
     }
 
     .gr-textfield__error-msg {
