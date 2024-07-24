@@ -1,64 +1,83 @@
 :root {
 
-    --local-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1);
+  --local-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.1);
 
-    /*Font*/
-    --font: var(--gr-font, sans-serif);
-    --font-weight: var(--gr-font-weight, 400);
+  /*Font*/
+  --font: var(--gr-font, sans-serif);
+  --font-weight: var(--gr-font-weight, 400);
 
-    /*Colors*/
-    --primary-color: var(--gr-primary-color, #2BBCBC);
-    --primary-color-opacity: var(--gr-primary-color-opacity, #2BBCBC4D);
-    --primary-color-hover: var(--gr-primary-color-hover, #209797);
+  /*Colors*/
+  --primary-color: var(--gr-primary-color, #2BBCBC);
+  --primary-color-opacity: var(--gr-primary-color-opacity, #2BBCBC4D);
+  --primary-color-hover: var(--gr-primary-color-hover, #209797);
 
-    --secondary-color: var(--gr-secondary-color, #7460EE);
-    --secondary-color-opacity: var(--gr-secondary-color-opacity, #7460EE4D);
-    --secondary-color-hover: var(--gr-secondary-color-hover, #4f3ac1);
+  --secondary-color: var(--gr-secondary-color, #7460EE);
+  --secondary-color-opacity: var(--gr-secondary-color-opacity, #7460EE4D);
+  --secondary-color-hover: var(--gr-secondary-color-hover, #4f3ac1);
 
-    --tertiary-color: var(--gr-tertiary-color, #BC712B);
-    --tertiary-color-opacity: var(--gr-tertiary-color-opacity, #BC712B4D);
-    --tertiary-color-hover: var(--gr-tertiary-color-hover, #8f5219);
+  --tertiary-color: var(--gr-tertiary-color, #BC712B);
+  --tertiary-color-opacity: var(--gr-tertiary-color-opacity, #BC712B4D);
+  --tertiary-color-hover: var(--gr-tertiary-color-hover, #8f5219);
 
-    --gray-text-color: var(--gr-gray-text-color, #707070);
-    --gray-placeholder-color: var(--gr-gray-placeholder-color, #c9c9c9);
+  --gray-text-color: var(--gr-gray-text-color, #707070);
+  --gray-placeholder-color: var(--gr-gray-placeholder-color, #c9c9c9);
 
-    --disabled-button-background: var(--gr-disabled-button-background, #e1e1e1);
-    --disabled-button-text: var(--gr-disabled-button-text, #a7a7a7);
+  --disabled-button-background: var(--gr-disabled-button-background, #e1e1e1);
+  --disabled-button-text: var(--gr-disabled-button-text, #a7a7a7);
 
-    --gray-border-color: var(--gr-gray-border-color, #dbdbdb);
-    --gray-border-color-hover: var(--gr-gray-border-color-hover, #B7B7B7);
+  --gray-border-color: var(--gr-gray-border-color, #dbdbdb);
+  --gray-border-color-hover: var(--gr-gray-border-color-hover, #B7B7B7);
 
-    --disabled-input-border-color: var(--gr-disabled-input-border-color, #e1e1e1);
-    --disabled-input-background-color: var(--gr-disabled-input-background-color, #f3f3f3);
+  --disabled-input-border-color: var(--gr-disabled-input-border-color, #e1e1e1);
+  --disabled-input-background-color: var(--gr-disabled-input-background-color, #f3f3f3);
 
-    --error-color: var(--gr-error-color, #e12525);
-    --error-color-opacity: var(--gr-error-color-opacity, #e125254D);
+  --error-color: var(--gr-error-color, #e12525);
+  --error-color-opacity: var(--gr-error-color-opacity, #e125254D);
 
-    /*Transitions*/
-    --transition-hover: var(--gr-transition-hover, 0.15s);
-    --transition-position: var(--gr-transition-position, 0.25s);
+  /*Transitions*/
+  --transition-hover: var(--gr-transition-hover, 0.15s);
+  --transition-position: var(--gr-transition-position, 0.25s);
 
-    /*Decorations*/
-    --corner-radius: var(--gr-corner-radius, 5px);
-    --border-thickness: var(--gr-border-thickness, 2px);
-    --shadow: var(--gr-shadow, var(--local-shadow));
+  /*Decorations*/
+  --corner-radius: var(--gr-corner-radius, 5px);
+  --border-thickness: var(--gr-border-thickness, 2px);
+  --shadow: var(--gr-shadow, var(--local-shadow));
 
 }
 
 [class^="gr-"] {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 button[class^="gr-"] {
-    cursor: pointer;
-    appearance: none;
-    background-color: transparent;
-    outline: none;
-    user-select: none;
-    border: none;
-    padding: 0;
+  cursor: pointer;
+  appearance: none;
+  background-color: transparent;
+  outline: none;
+  user-select: none;
+  border: none;
+  padding: 0;
 
-    &:active {
-        transform: translateY(1px);
-    }
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.gr-icon-down::after {
+  content: "\25BC";
+  font-style: normal;
+}
+
+.gr-icon-eye-off::after {
+  content: "hide";
+  font-family: var(--font);
+  font-size: 0.7rem;
+  font-style: normal;
+}
+
+.gr-icon-eye-on::after {
+  content: "show";
+  font-family: var(--font);
+  font-size: 0.7rem;
+  font-style: normal;
 }

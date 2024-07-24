@@ -2,56 +2,62 @@
 
 // Basic style
 .gr-loader {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    &__indicator {
-        display: inline-block;
-        pointer-events: none;
-        user-select: none;
-        border-radius: 50%;
-        border-style: solid;
-        height: 20px;
-        width: 20px;
-        border-width: 3px;
-        animation: gr-loader-indicator linear 0.7s infinite;
-    }
+  &__indicator {
+    display: inline-block;
+    pointer-events: none;
+    user-select: none;
+    border-radius: 50%;
+    border-style: solid;
+    height: 20px;
+    width: 20px;
+    border-width: 3px;
+    animation: gr-loader-indicator linear 0.7s infinite;
+  }
 }
 
 @keyframes gr-loader-indicator {
-    from {
-        transform: rotate(0);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 // Priorities
 .gr-loader--primary .gr-loader__indicator {
-    border-color: var(--primary-color-opacity);
-    border-top-color: var(--primary-color);
+  border-color: var(--primary-color-opacity);
+  border-top-color: var(--primary-color);
 }
 
 .gr-loader--secondary .gr-loader__indicator {
-    border-color: var(--secondary-color-opacity);
-    border-top-color: var(--secondary-color);
+  border-color: var(--secondary-color-opacity);
+  border-top-color: var(--secondary-color);
 }
 
 .gr-loader--tertiary .gr-loader__indicator {
-    border-color: var(--tertiary-color-opacity);
-    border-top-color: var(--tertiary-color);
+  border-color: var(--tertiary-color-opacity);
+  border-top-color: var(--tertiary-color);
 }
 
 // Negative
 .gr-loader--negative .gr-loader__indicator {
-    border-color: rgba(255, 255, 255, 0.5);
-    border-top-color: white;
+  border-color: rgba(255, 255, 255, 0.5);
+  border-top-color: white;
 }
 
 // Gray
 .gr-loader--gray .gr-loader__indicator {
-    border-color: var(--gray-border-color);
-    border-top-color: var(--gray-border-color-hover);
+  border-color: var(--gray-border-color);
+  border-top-color: var(--gray-border-color-hover);
+}
+
+// Error
+.gr-loader--error .gr-loader__indicator {
+  border-color: var(--error-color-opacity);
+  border-top-color: var(--error-color);
 }
