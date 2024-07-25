@@ -1,5 +1,5 @@
-import {html, LitElement, TemplateResult} from "lit";
-import {customElement, property} from "lit/decorators.js";
+import {html, LitElement, PropertyValues, TemplateResult} from "lit";
+import {customElement, property, query} from "lit/decorators.js";
 import {modifiersToBem} from "../../commons/scripts/functions.ts";
 import "@components/textfield/textfield.comp"
 import "./dropdown.scss"
@@ -40,28 +40,46 @@ export class GrDropdown extends LitElement {
   @property({attribute: 'icon-down'})
   iconDown?: string
 
+  @property()
+  items?: string
+
+  @query(".gr-dropdown")
+  private _ref: HTMLDivElement | undefined
+
   protected createRenderRoot(): HTMLElement | DocumentFragment {
     this.style.display = "inline-block"
     return this
   }
 
+  protected shouldUpdate(_changedProperties: PropertyValues): boolean {
+    this.addItems()
+    return super.shouldUpdate(_changedProperties);
+  }
+
   protected render(): TemplateResult {
     return html`
       <div class="${this.modifierStyle()}">
-        <div class="gr-dropdown__container">
-          <gr-textfield
-            label="${this.label}"
-            placeholder="${this.placeholder}"
-            type="${this.type}"
-            size="${this.size}"
-            state="${this.state}"
-            priority="${this.priority}"
-            placeholder-position="${this.placeholderPosition}"
-          ></gr-textfield>
-        </div>
-        <i class="gr-dropdown__icon-down ${this.iconDown ?? "gr-icon-down"}"></i>
+        <gr-textfield
+          label="${this.label}"
+          placeholder="${this.placeholder}"
+          type="${this.type}"
+          size="${this.size}"
+          state="${this.state}"
+          priority="${this.priority}"
+          placeholder-position="${this.placeholderPosition}"
+          selectable
+          icon-down="${this.iconDown ?? "gr-icon-down"}"
+        ></gr-textfield>
+        <ul class="gr-dropdown__list"></ul>
       </div>
     `
+  }
+
+  private addItems = (): void => {
+    const list = this._ref?.querySelector('.gr-dropdown__list')
+    this.items?.split(',').forEach(it => {
+      console.log(it)
+    })
   }
 
   private modifierStyle = () => {

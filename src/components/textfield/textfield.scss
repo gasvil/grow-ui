@@ -74,7 +74,10 @@
 
     &--selectable {
       margin-left: 10px;
-      font-size: 0.7rem;
+
+      &.gr-icon-down {
+        font-size: 0.7rem;
+      }
     }
   }
 
@@ -454,8 +457,14 @@
 }
 
 // Readonly
-.gr-textfield--readonly {
+.gr-textfield--readonly .gr-textfield__container {
   pointer-events: none;
+}
+
+// Selectable
+.gr-textfield--selectable .gr-textfield__container,
+.gr-textfield--selectable .gr-textfield__container * {
+  cursor: pointer;
 }
 
 // Error

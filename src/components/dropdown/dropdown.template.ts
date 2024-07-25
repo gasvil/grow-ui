@@ -16,6 +16,7 @@ export interface DropdownArgs {
   placeholderPosition?: DropdownPlaceholderPosition
   placeholder?: string
   label?: string
+  iconDown?: string
 }
 
 export const GrDropdownTemplate = (args: DropdownArgs) => {

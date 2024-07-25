@@ -103,8 +103,12 @@ export class GrTextfield extends LitElement {
     this.style.display = 'inline-block'
     this._inputType = this.inputType == 'password' ? 'password' : 'text'
     this.setWidth()
-    this.setReadonly()
     return this
+  }
+
+  protected shouldUpdate(_changedProperties: PropertyValues): boolean {
+    this.setIcons()
+    return super.shouldUpdate(_changedProperties);
   }
 
   protected render(): TemplateResult {
@@ -135,12 +139,8 @@ export class GrTextfield extends LitElement {
   }
 
   protected updated(_: PropertyValues): void {
+    this.setReadonly()
     this.handleFocus(undefined)
-  }
-
-  protected shouldUpdate(_changedProperties: PropertyValues): boolean {
-    this.setIcons()
-    return super.shouldUpdate(_changedProperties);
   }
 
   private modifierStyle = () => {
@@ -153,12 +153,13 @@ export class GrTextfield extends LitElement {
       this.leadingIcon ? 'leading' : null,
       this.error != null ? 'error' : null,
       this.readonly ? 'readonly' : null,
+      this.selectable ? 'selectable' : null,
       this.value.length > 0 ? 'content-filled' : null
     ])
   }
 
   private setReadonly = (): void => {
-    if (this.readonly) {
+    if (this.readonly || this.selectable) {
       const input = this._ref?.querySelector('.gr-textfield__input')
       input?.setAttribute('readonly', '')
     }

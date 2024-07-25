@@ -29,6 +29,7 @@ export interface TextfieldArgs {
   maxLength?: number
   readonly?: boolean
   selectable?: boolean
+  iconDown?: string
   error?: string
 }
 
@@ -54,6 +55,7 @@ export const GrTextfieldTemplate = (args: TextfieldArgs) => {
   args.regex && grTextfield.setAttribute('regex', args.regex)
   args.maxLength && grTextfield.setAttribute('max-length', args.maxLength.toString())
   args.selectable && grTextfield.setAttribute('selectable', '')
+  args.iconDown && grTextfield.setAttribute('icon-down', args.iconDown)
   args.readonly && grTextfield.setAttribute('readonly', '')
 
   if (args.error != null) grTextfield.setAttribute('error', args.error ?? "")

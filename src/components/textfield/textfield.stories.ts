@@ -137,6 +137,20 @@ export default {
         defaultValue: {summary: false}
       }
     },
+    selectable: {
+      description: "Define si el campo de texto será de tipo seleccionable.",
+      type: {name: "boolean"},
+      control: {type: "boolean"},
+      table: {
+        defaultValue: {summary: false}
+      }
+    },
+    iconDown: {
+      description: "Define un ícono de tipo flecha hacia abajo para acompañar el tipo seleccionable.",
+      name: "icon-down",
+      type: {name: "string"},
+      control: {type: "text"},
+    },
     error: {
       description: "Texto que acompaña al campo de texto cuando ocurra algún error. Se acompaña de estilo asociado al error. Si no se ingresa un texto solo se muestra el estilo.",
       type: {name: "string"},
@@ -148,13 +162,7 @@ export default {
 export let Default: StoryObj
 Default = {
   args: {
-    placeholder: 'Default textfield',
-    loading: true,
-    trailingIcon: 'fa-solid fa-up-down-left-right',
-    inputType: 'password',
-    passwordIconOn: 'fa-solid fa-eye',
-    passwordIconOff: 'fa-solid fa-eye-slash',
-    selectable: true
+    placeholder: 'Default textfield'
   }
 }
 
@@ -308,6 +316,18 @@ Readonly = {
     readonly: true,
     value: 'Readonly textfield'
   }
+}
+
+export let Selectable: StoryObj
+Selectable = {
+  render: (args) => html`
+    ${GrTextfieldTemplate({placeholder: 'Default selectable', selectable: true, ...args})}
+    ${GrTextfieldTemplate({
+      placeholder: 'Selectable custom icon',
+      selectable: true,
+      iconDown: 'fa-solid fa-angle-down', ...args
+    })}
+  `
 }
 
 export let Error: StoryObj
