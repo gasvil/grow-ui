@@ -115,7 +115,7 @@ export class GrTextfield extends LitElement {
     return html`
       <div id="${this.refId}" class="${this.modifierStyle()}">
         ${this.setLabel()}
-        <label class="gr-textfield__container">
+        <label class="gr-textfield__container" @click="${this.handleClick}">
           ${this._textfieldIcons.leading}
           <input
             class="gr-textfield__input"
@@ -266,6 +266,14 @@ export class GrTextfield extends LitElement {
     }
   }
 
+  private handleClick = (e?: Event): void => {
+    e?.preventDefault()
+    const input = this._ref?.querySelector('.gr-textfield__input') as HTMLInputElement
+    input?.focus()
+    const clickEvent = new CustomEvent('gr-click', e)
+    this.dispatchEvent(clickEvent)
+  }
+
   private handleFocus = (e?: Event): void => {
     if (e == undefined && this.state == 'focus') {
       const input = this.querySelector('.gr-textfield__input') as HTMLInputElement
@@ -278,8 +286,8 @@ export class GrTextfield extends LitElement {
     if (document.activeElement == target) {
       loader?.removeAttribute('gray')
       this.setAttribute('state', 'focus')
-      this.handlePlaceholderIn()
       this.setRegex()
+      this.handlePlaceholderIn()
     } else if (this.state == 'focus') {
       loader?.setAttribute('gray', '')
       this.setAttribute('state', 'enabled')

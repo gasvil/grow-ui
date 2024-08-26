@@ -1,0 +1,15 @@
+.gr-dropdown-option {
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: var(--transition-hover);
+  border-radius: 5px;
+
+  &:hover:not(&--selected) {
+    background-color: var(--disabled-input-background-color);
+  }
+
+  &--selected {
+    color: var(--primary-color);
+    background-color: var(--primary-color-opacity);
+  }
+}

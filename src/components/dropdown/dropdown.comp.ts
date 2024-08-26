@@ -1,7 +1,8 @@
 import {html, LitElement, PropertyValues, TemplateResult} from "lit";
-import {customElement, property, query} from "lit/decorators.js";
-import {modifiersToBem} from "../../commons/scripts/functions.ts";
+import {customElement, property, query, state} from "lit/decorators.js";
+import {getSiblings, modifiersToBem, slideToggle, slideUp} from "../../commons/scripts/functions.ts";
 import "@components/textfield/textfield.comp"
+import "@components/dropdown-option/dropdown-option.comp"
 import "./dropdown.scss"
 
 export type DropdownSize = 'small' | 'medium' | 'large'
@@ -46,14 +47,17 @@ export class GrDropdown extends LitElement {
   @query(".gr-dropdown")
   private _ref: HTMLDivElement | undefined
 
+  @state()
+  private _optionSelected: {
+    label?: string
+  } = {}
+
+  @query('.gr-textfield__icon--selectable')
+  private _iconDown: HTMLElement | undefined
+
   protected createRenderRoot(): HTMLElement | DocumentFragment {
     this.style.display = "inline-block"
     return this
-  }
-
-  protected shouldUpdate(_changedProperties: PropertyValues): boolean {
-    this.addItems()
-    return super.shouldUpdate(_changedProperties);
   }
 
   protected render(): TemplateResult {
@@ -68,6 +72,7 @@ export class GrDropdown extends LitElement {
           priority="${this.priority}"
           placeholder-position="${this.placeholderPosition}"
           selectable
+          value="${this._optionSelected.label}"
           icon-down="${this.iconDown ?? "gr-icon-down"}"
         ></gr-textfield>
         <ul class="gr-dropdown__list"></ul>
@@ -75,10 +80,34 @@ export class GrDropdown extends LitElement {
     `
   }
 
+  protected firstUpdated(_changedProperties: PropertyValues) {
+    super.firstUpdated(_changedProperties);
+    this.addItems()
+    this.handleDropdown()
+  }
+
   private addItems = (): void => {
-    const list = this._ref?.querySelector('.gr-dropdown__list')
+    const list = this._ref?.querySelector('.gr-dropdown__list') as HTMLElement
     this.items?.split(',').forEach(it => {
-      console.log(it)
+      const optionTag = document.createElement('gr-dropdown-option')
+      optionTag.setAttribute('label', it.trim())
+      optionTag.addEventListener('gr-click', (e: CustomEvent) => {
+        slideUp(list)
+        this._iconDown?.style.removeProperty('transform')
+        this._optionSelected = {
+          label: e.detail.label
+        }
+        const siblings: HTMLElement[] = getSiblings(optionTag)
+        siblings.forEach(it => {
+          const option = it.querySelector('.gr-dropdown-option')
+          option?.classList.remove('gr-dropdown-option--selected')
+        })
+        const chooseEvent = new CustomEvent('gr-choose', {
+          detail: this._optionSelected
+        })
+        this.dispatchEvent(chooseEvent)
+      })
+      list?.append(optionTag)
     })
   }
 
@@ -90,6 +119,32 @@ export class GrDropdown extends LitElement {
       this.priority,
       this.placeholderPosition && this.placeholder ? 'placeholder-' + this.placeholderPosition : null,
     ])
+  }
+
+  private handleDropdown = () => {
+    const grTextfield = this._ref?.querySelector('gr-textfield') as HTMLElement
+    const inputSelectable = grTextfield?.querySelector('.gr-textfield__input') as HTMLInputElement
+    const list = this._ref?.querySelector('.gr-dropdown__list') as HTMLElement
+    grTextfield.addEventListener('gr-click', _ => {
+      const opened = list?.classList.contains('gr-dropdown__list--opened')
+      slideToggle(list)
+      if (opened) {
+        inputSelectable?.blur()
+        console.log('opened')
+        this._iconDown?.style.removeProperty('transform')
+      } else {
+        console.log('not opened')
+        this._iconDown && (this._iconDown.style.transform = "rotate(180deg)")
+      }
+    })
+
+    document.addEventListener('click', e => {
+      const t = e.target as HTMLElement
+      if (!t.closest('.gr-textfield__container') && !t.closest('.gr-dropdown__list')) {
+        slideUp(list)
+        this._iconDown?.style.removeProperty('transform')
+      }
+    })
   }
 
 }

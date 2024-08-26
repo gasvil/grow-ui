@@ -22,7 +22,7 @@ export default {
     },
     size: {
       description: "Tamaño del campo de texto",
-      type: {name: "small | medium, large"},
+      type: {name: "small | medium | large"},
       control: {type: "select"},
       options: ['small', 'medium', 'large'],
       table: {
@@ -68,12 +68,20 @@ export default {
       control: {type: "select"},
       options: ['inside', 'outside', 'overline'],
     },
+    items: {
+      description: "Opciones básicas a escoger dentro del campo seleccionable separados por coma.",
+      type: {name: "string"},
+      control: {type: "string"},
+    }
   }
 }
 
 export let Default: StoryObj
 Default = {
   args: {
-    label: 'Dropdown'
+    label: 'Dropdown',
+    placeholder: 'Select one',
+    items: 'item 1, item 2, item 3',
+    placeholderPosition: 'overline'
   }
 }

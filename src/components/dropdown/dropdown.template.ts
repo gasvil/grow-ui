@@ -16,7 +16,8 @@ export interface DropdownArgs {
   placeholderPosition?: DropdownPlaceholderPosition
   placeholder?: string
   label?: string
-  iconDown?: string
+  iconDown?: string,
+  items?: string
 }
 
 export const GrDropdownTemplate = (args: DropdownArgs) => {
@@ -30,6 +31,7 @@ export const GrDropdownTemplate = (args: DropdownArgs) => {
   args.placeholderPosition && grDropdown.setAttribute('placeholder-position', args.placeholderPosition)
   args.placeholder && grDropdown.setAttribute('placeholder', args.placeholder)
   args.label && grDropdown.setAttribute('label', args.label)
+  args.items && grDropdown.setAttribute('items', args.items)
 
   return grDropdown
 }

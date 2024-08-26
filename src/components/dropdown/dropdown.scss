@@ -4,6 +4,18 @@
 .gr-dropdown {
   font-family: var(--font);
   width: 100%;
+  position: relative;
+}
 
-
+.gr-dropdown__list {
+  display: none;
+  flex-direction: column;
+  border-style: solid;
+  border-width: var(--border-thickness);
+  border-color: var(--gray-border-color);
+  border-radius: var(--corner-radius);
+  margin: 3px 0 0;
+  padding: 7px;
+  position: absolute;
+  min-width: 100%;
 }
