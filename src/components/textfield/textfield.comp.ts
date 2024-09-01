@@ -1,8 +1,9 @@
 import {html, LitElement, PropertyValues, TemplateResult} from "lit";
 import {customElement, property, query, state} from "lit/decorators.js";
-import {findParentBackground, getRegexFromType, modifiersToBem} from "../../commons/scripts/functions.ts";
+import {findParentBackground, getRegexFromType} from "../../commons/scripts/functions.ts";
 import "./textfield.scss"
 import "@components/button/button.comp"
+import {GrHtml} from "@growp/functions";
 
 export type TextfieldSize = 'small' | 'medium' | 'large'
 export type TextfieldType = 'outlined' | 'outlined-filled' | 'filled' | 'underlined' | 'underlined-filled'
@@ -24,16 +25,16 @@ export class GrTextfield extends LitElement {
   value: string = ''
 
   @property()
-  size?: TextfieldSize = 'medium'
+  size: TextfieldSize = 'medium'
 
   @property()
-  type?: TextfieldType = 'outlined'
+  type: TextfieldType = 'outlined'
 
   @property()
-  state?: TextfieldState = 'enabled'
+  state: TextfieldState = 'enabled'
 
   @property()
-  priority?: TextfieldPriority = 'primary'
+  priority: TextfieldPriority = 'primary'
 
   @property()
   placeholder?: string
@@ -69,10 +70,10 @@ export class GrTextfield extends LitElement {
   maxLength?: number
 
   @property({type: Boolean})
-  readonly?: boolean = false
+  readonly: boolean = false
 
   @property({type: Boolean})
-  selectable?: boolean = false
+  selectable: boolean = false
 
   @property({attribute: 'icon-down'})
   iconDown?: string
@@ -144,18 +145,21 @@ export class GrTextfield extends LitElement {
   }
 
   private modifierStyle = () => {
-    return modifiersToBem('textfield', [
+    const modifiers: string[] = [
       this.size,
       this.type,
       this.state,
-      this.priority,
-      this.placeholderPosition && this.placeholder ? 'placeholder-' + this.placeholderPosition : null,
-      this.leadingIcon ? 'leading' : null,
-      this.error != null ? 'error' : null,
-      this.readonly ? 'readonly' : null,
-      this.selectable ? 'selectable' : null,
-      this.value.length > 0 ? 'content-filled' : null
-    ])
+      this.priority
+    ]
+
+    this.placeholderPosition && modifiers.push(`placeholder-${this.placeholderPosition}`)
+    this.leadingIcon && modifiers.push('leading')
+    this.error != null && modifiers.push('error')
+    this.readonly && modifiers.push('readonly')
+    this.selectable && modifiers.push('selectable')
+    this.value.length > 0 && modifiers.push('content-filled')
+
+    return GrHtml.createBemCss('gr-textfield', modifiers)
   }
 
   private setReadonly = (): void => {

@@ -1,9 +1,10 @@
 import {html, LitElement, PropertyValues, TemplateResult} from "lit";
 import {customElement, property, query, state} from "lit/decorators.js";
-import {getSiblings, modifiersToBem, slideToggle, slideUp} from "../../commons/scripts/functions.ts";
+import {getSiblings, slideToggle, slideUp} from "../../commons/scripts/functions.ts";
 import "@components/textfield/textfield.comp"
 import "@components/dropdown-option/dropdown-option.comp"
 import "./dropdown.scss"
+import {GrHtml} from "@growp/functions";
 
 export type DropdownSize = 'small' | 'medium' | 'large'
 export type DropdownType = 'outlined' | 'outlined-filled' | 'filled' | 'underlined' | 'underlined-filled'
@@ -18,19 +19,19 @@ export class GrDropdown extends LitElement {
   refId?: string
 
   @property()
-  size?: DropdownSize = 'medium'
+  size: DropdownSize = 'medium'
 
   @property()
-  type?: DropdownType = 'outlined'
+  type: DropdownType = 'outlined'
 
   @property()
-  state?: DropdownState = 'enabled'
+  state: DropdownState = 'enabled'
 
   @property()
-  priority?: DropdownPriority = 'primary'
+  priority: DropdownPriority = 'primary'
 
   @property({attribute: 'placeholder-position'})
-  placeholderPosition?: DropdownPlaceholderPosition = 'inside'
+  placeholderPosition: DropdownPlaceholderPosition = 'inside'
 
   @property()
   placeholder?: string
@@ -112,13 +113,16 @@ export class GrDropdown extends LitElement {
   }
 
   private modifierStyle = () => {
-    return modifiersToBem('dropdown', [
+    const modifiers: string[] = [
       this.size,
       this.type,
       this.state,
-      this.priority,
-      this.placeholderPosition && this.placeholder ? 'placeholder-' + this.placeholderPosition : null,
-    ])
+      this.priority
+    ]
+
+    this.placeholderPosition && modifiers.push(`placeholder-${this.placeholderPosition}`)
+
+    return GrHtml.createBemCss('gr-dropdown', modifiers)
   }
 
   private handleDropdown = () => {

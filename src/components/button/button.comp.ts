@@ -1,8 +1,8 @@
 import {html, LitElement, PropertyValues, TemplateResult} from "lit";
 import {customElement, property} from "lit/decorators.js";
-import {modifiersToBem} from "../../commons/scripts/functions";
 import "@components/loader/loader.comp"
 import './button.scss'
+import {GrHtml} from "@growp/functions";
 
 export type ButtonType = 'box' | 'outline' | 'negative' | 'inline'
 export type ButtonSize = 'small' | 'medium' | 'large'
@@ -105,12 +105,13 @@ export class GrButton extends LitElement {
   }
 
   private modifierStyle = () => {
-    return modifiersToBem('button', [
+    const modifiers: string[] = [
       this.type,
       this.size,
       this.priority,
       this.state
-    ])
+    ]
+    return GrHtml.createBemCss('gr-button', modifiers)
   }
 
   private setLoadingButtonSize = (changedProperties: PropertyValues) => {

@@ -1,7 +1,7 @@
 import {customElement, property} from "lit/decorators.js";
 import {html, LitElement, TemplateResult} from "lit";
-import {modifiersToBem} from "../../commons/scripts/functions.ts";
 import "./dropdown-option.scss"
+import {GrHtml} from "@growp/functions";
 
 export type DropdownOptionSize = 'small' | 'medium' | 'large';
 
@@ -12,7 +12,7 @@ export class GrDropdownOption extends LitElement {
   refId?: string
 
   @property()
-  size?: DropdownOptionSize = 'medium'
+  size: DropdownOptionSize = 'medium'
 
   @property()
   label?: string
@@ -34,9 +34,8 @@ export class GrDropdownOption extends LitElement {
   }
 
   private modifierStyle = () => {
-    return modifiersToBem('dropdown-option', [
-      this.size
-    ])
+    const modifiers: string[] = [this.size]
+    return GrHtml.createBemCss('gr-dropdown-option', modifiers)
   }
 
   private handleClick = (e?: Event) => {

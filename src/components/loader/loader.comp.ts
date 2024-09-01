@@ -1,7 +1,7 @@
 import {html, LitElement, TemplateResult} from "lit";
 import {customElement, property} from "lit/decorators.js";
-import {modifiersToBem} from "../../commons/scripts/functions";
 import "./loader.scss"
+import {GrHtml} from "@growp/functions";
 
 export type LoaderPriority = 'primary' | 'secondary' | 'tertiary'
 
@@ -55,12 +55,13 @@ export class GrLoader extends LitElement {
   }
 
   private modifierStyle = () => {
-    return modifiersToBem('loader', [
-      this.priority,
-      this.negative ? 'negative' : null,
-      this.gray ? 'gray' : null,
-      this.error ? 'error' : null
-    ])
+    const modifiers: string[] = [this.priority]
+
+    this.negative && modifiers.push('negative')
+    this.gray && modifiers.push('gray')
+    this.error && modifiers.push('error')
+
+    return GrHtml.createBemCss('gr-loader', modifiers)
   }
 
 }
