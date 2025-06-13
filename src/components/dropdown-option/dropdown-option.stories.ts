@@ -1,5 +1,5 @@
 import {DropdownOptionArgs, GrDropdownOptionTemplate} from "./dropdown-option.template.ts";
-import {StoryObj} from "@storybook/web-components";
+import {StoryObj} from "@storybook/web-components-vite";
 
 export default {
   title: 'Grow/Dropdown option',

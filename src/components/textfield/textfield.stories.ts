@@ -1,5 +1,5 @@
 import {GrTextfieldTemplate, TextfieldArgs} from "./textfield.template.ts";
-import {StoryObj} from "@storybook/web-components";
+import {StoryObj} from "@storybook/web-components-vite";
 import {html} from "lit";
 
 export default {

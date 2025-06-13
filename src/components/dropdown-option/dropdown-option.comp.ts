@@ -1,14 +1,14 @@
-import {customElement, property} from "lit/decorators.js";
-import {html, LitElement, TemplateResult} from "lit";
+import { customElement, property } from "lit/decorators.js";
+import { html, LitElement, TemplateResult } from "lit";
 import "./dropdown-option.scss"
-import {GrHtml} from "@growp/functions";
+import { GrHtml } from "@growp/functions";
 
 export type DropdownOptionSize = 'small' | 'medium' | 'large';
 
 @customElement('gr-dropdown-option')
 export class GrDropdownOption extends LitElement {
 
-  @property({attribute: 'ref-id'})
+  @property({ attribute: 'ref-id' })
   refId?: string
 
   @property()

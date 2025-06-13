@@ -1,8 +1,8 @@
-import {html, LitElement, PropertyValues, TemplateResult} from "lit";
-import {customElement, property} from "lit/decorators.js";
+import { html, LitElement, PropertyValues, TemplateResult } from "lit";
+import { customElement, property } from "lit/decorators.js";
 import "@components/loader/loader.comp"
 import './button.scss'
-import {GrHtml} from "@growp/functions";
+import { GrHtml } from "@growp/functions";
 
 export type ButtonType = 'box' | 'outline' | 'negative' | 'inline'
 export type ButtonSize = 'small' | 'medium' | 'large'
@@ -13,7 +13,7 @@ export type ButtonAnchorType = '_blank' | '_self' | '_parent' | '_top'
 @customElement('gr-button')
 export class GrButton extends LitElement {
 
-  @property({attribute: 'ref-id'})
+  @property({ attribute: 'ref-id' })
   refId?: string
 
   @property()
@@ -31,10 +31,10 @@ export class GrButton extends LitElement {
   @property()
   state: ButtonState = 'enabled'
 
-  @property({attribute: 'leading-icon'})
+  @property({ attribute: 'leading-icon' })
   leadingIcon?: string
 
-  @property({attribute: 'trailing-icon'})
+  @property({ attribute: 'trailing-icon' })
   trailingIcon?: string
 
   @property()

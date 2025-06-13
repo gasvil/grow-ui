@@ -1,4 +1,4 @@
-import {StoryObj} from "@storybook/web-components";
+import {StoryObj} from "@storybook/web-components-vite";
 import {GrLoaderTemplate, LoaderProps} from "./loader.template";
 
 export default {

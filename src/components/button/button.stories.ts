@@ -1,4 +1,4 @@
-import {StoryObj} from "@storybook/web-components";
+import {StoryObj} from "@storybook/web-components-vite";
 import {ButtonArgs, GrButtonTemplate} from "./button.template";
 import {html} from "lit";
 
